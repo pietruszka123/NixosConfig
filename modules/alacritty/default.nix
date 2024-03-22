@@ -8,10 +8,8 @@ in {
   config = lib.mkIf cfg.enable {
 
     home.packages = with pkgs; [ alacritty ];
-    
-    home.file.".config/alacritty/alacritty.toml".source = ./alacritty.toml;
 
-	
+    home.file.".config/alacritty/alacritty.toml".source = ./alacritty.toml;
 
   };
 

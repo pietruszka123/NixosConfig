@@ -13,4 +13,4 @@ fi
 echo $command
 echo $abs_path
 
-nixos-rebuild switch --flake $NIX_PATH#default
+nixos-rebuild switch --flake $NIX_PATH#default --option eval-cache false

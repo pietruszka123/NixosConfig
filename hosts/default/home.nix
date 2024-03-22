@@ -8,6 +8,10 @@
   modules.hyprland.enable = true;
   modules.fish.enable = true;
   modules.ranger.enable = true;
+
+  modules.dunst.enable = true;
+
+  #Terminals
   modules.alacritty.enable = true;
   modules.wezterm.enable = false;
 
@@ -23,9 +27,7 @@
     pkgs.gitkraken
     pkgs.unzip
     pkgs.nwg-look
-    pkgs.mesa
     pkgs.go
-    #pkgs.git-credential-manager
     (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; })
   ];
   #home.pointerCursor = {
