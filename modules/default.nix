@@ -1,5 +1,5 @@
 { ... }: {
 
-  imports = [ ./packages ./hyprland ./fish ./ranger ./alacritty ./wezterm ];
+  imports = [ ./packages ./hyprland ./fish ./ranger ./alacritty ./wezterm ./dunst ];
 
 }
