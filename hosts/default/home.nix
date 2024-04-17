@@ -1,10 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-
-    ../../modules
-  ];
+  imports = [ ../../modules ];
   modules.hyprland.enable = true;
   modules.fish.enable = true;
   modules.ranger.enable = true;
@@ -13,7 +10,7 @@
 
   #Terminals
   modules.alacritty.enable = true;
-  modules.wezterm.enable = false;
+  modules.wezterm.enable = true;
 
   home.username = "user";
   home.homeDirectory = "/home/user";
@@ -24,18 +21,23 @@
 
   fonts.fontconfig.enable = true;
   home.packages = [
+    pkgs.mgba
     pkgs.gitkraken
     pkgs.unzip
     pkgs.nwg-look
     pkgs.go
     (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; })
   ];
-  #home.pointerCursor = {
-  #      gtk.enable = true;
-  #      package = pkgs.vanilla-dmz;
-  #      name = "Vanilla-DMZ";
-  #      #package= pkgs.catppuccin-cursors.mochaLavender;
-  #      #name = "catppuccin-Mocha-Lavender";
-  #      size = 24;	
-  #};
+  home.pointerCursor = {
+    gtk.enable = true;
+    #package = pkgs.vanilla-dmz;
+    #name = "Vanilla-DMZ";
+    package = pkgs.catppuccin-cursors.mochaLavender;
+    name = "Catppuccin-Mocha-Lavender";
+    size = 24;
+    x11 = {
+      enable = true;
+      defaultCursor = "Catppuccin-Mocha-Lavender";
+    };
+  };
 }

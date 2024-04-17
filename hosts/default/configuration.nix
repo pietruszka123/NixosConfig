@@ -19,11 +19,29 @@
   system.pipewire.enable = true;
 
   programs.hyprland.enable = true;
+specialisation = {
+    on-the-go.configuration = {
+      system.nixos.tags = [ "on-the-go" ];
+      system.nvidia.nvidia_prime = lib.mkForce "offload";
+      home-manager.extraSpecialArgs = lib.mkForce {
+        inherit inputs;
+        userConfig = { system = { specialization = "on-the-go"; }; };
+      };
 
+      #hardware.nvidia = {
+      #  prime.offload.enable = lib.mkForce true;
+      #  prime.offload.enableOffloadCmd = lib.mkForce true;
+      #  prime.sync.enable = lib.mkForce false;
+      #};
+    };
+  };
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = {
+      inherit inputs;
+      userConfig = { system = { specialization = "default"; }; };
+    };
     users = { "user" = import ./home.nix; };
   };
 
@@ -53,17 +71,7 @@
 
   boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
 
-  specialisation = {
-    on-the-go.configuration = {
-      system.nixos.tags = [ "on-the-go" ];
-      system.nvidia.nvidia_prime = lib.mkForce "offload";
-      #hardware.nvidia = {
-      #  prime.offload.enable = lib.mkForce true;
-      #  prime.offload.enableOffloadCmd = lib.mkForce true;
-      #  prime.sync.enable = lib.mkForce false;
-      #};
-    };
-  };
+  
 
   # Enable CUPS to print documents.
   # services.printing.enable = true; 
@@ -76,42 +84,21 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.user = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "input" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "input" "networkmanager" ]; # Enable ‘sudo’ for the user.
     shell = pkgs.fish;
     packages = with pkgs; [
-      #gnumake
-      #cmake
-
       # nix neovim language
       nil # lsp
       nixfmt # formatter
-
-      # github
-      #gh
 
       tofi # Tiny dynamic menu for Wayland
 
       pavucontrol
 
-      neofetch
-
-      # Screenshots
-      grim
-      slurp
+      hyfetch
 
       xwaylandvideobridge # Utility to allow streaming Wayland windows to X applications
       waybar # TODO: replace with eww
-
-      libsForQt5.dolphin # Filemanager
-
-      discord
-      betterdiscordctl
-
-      #webcord-vencord
-
-      # terminal emulators
-      #kitty
-      #alacritty
 
       neovim
       firefox
@@ -122,7 +109,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    dotnet-sdk
     brightnessctl # backlight controls
     lshw # a small tool to extract detailed information on the hardware configuration of the machine
     #gcc
