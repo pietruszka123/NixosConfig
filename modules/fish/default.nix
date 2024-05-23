@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 let cfg = config.modules.fish;
 in {
@@ -7,6 +7,22 @@ in {
 
     home.file.".config/fish/config.fish".source = ./config.fish;
 
+    #home.packages = with pkgs; [ pkgs.fishPlugins.tide ];
+
+    # programs.fish = {
+    #   enable = true;
+    #   interactiveShellInit = ''
+    #     set fish_greeting # Disable greeting
+    #   '';
+    #   plugins = [
+
+    #     {
+    #       name = "tide";
+    #       src = pkgs.fishPlugins.tide;
+    #     }
+    #   ];
+
+    # };
   };
 
 }

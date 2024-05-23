@@ -7,11 +7,11 @@ in {
   };
   config = lib.mkIf cfg.enable {
 
-	home.packages = with pkgs; [
-		discord
+    home.packages = with pkgs; [
+      discord
       betterdiscordctl
 
-	];	
+    ];
 
   };
 

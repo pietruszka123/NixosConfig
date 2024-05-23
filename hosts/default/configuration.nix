@@ -13,13 +13,20 @@
   nixpkgs.config.allowUnfree = true;
 
   # System
-  system.powerManagement.enable = true;
-  system.networking.enable = true;
-  system.nvidia.enable = true;
-  system.pipewire.enable = true;
+  system = {
+    powerManagement.enable = true;
+    networking.enable = true;
+    nvidia.enable = true;
+    pipewire.enable = true;
+    #lemurs.enable = true;
+  };
 
+  userConfig.system.lemurs.enable = true;
+
+  services.xserver.enable = true;
+  services.xserver.displayManager.startx.enable = true;
   programs.hyprland.enable = true;
-specialisation = {
+  specialisation = {
     on-the-go.configuration = {
       system.nixos.tags = [ "on-the-go" ];
       system.nvidia.nvidia_prime = lib.mkForce "offload";
@@ -64,27 +71,25 @@ specialisation = {
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
 
-  environment.sessionVariables = { DOTNET_ROOT = "${pkgs.dotnet-sdk}"; };
-
   #Flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
 
-  
-
   # Enable CUPS to print documents.
   # services.printing.enable = true; 
 
-  # Fish
   programs.fish.enable = true;
   # zsh
   #programs.zsh.enable = true;
+  #services.displayManager.enable = true;
+  #services.displayManager.execCmd = "${pkgs.lemurs}/bin/lemurs";
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.user = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "input" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    extraGroups =
+      [ "wheel" "input" "networkmanager","seat" ]; # Enable ‘sudo’ for the user.
     shell = pkgs.fish;
     packages = with pkgs; [
       # nix neovim language
@@ -99,6 +104,7 @@ specialisation = {
 
       xwaylandvideobridge # Utility to allow streaming Wayland windows to X applications
       waybar # TODO: replace with eww
+      eww
 
       neovim
       firefox
@@ -116,6 +122,8 @@ specialisation = {
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     parted
+
+    lemurs
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
