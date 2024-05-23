@@ -1,5 +1,10 @@
 { ... }: {
-  imports =
-    [ ./nvidia.nix ./pipewire.nix ./networking.nix ./powerManagement.nix ];
+  imports = [
+    ./nvidia.nix
+    ./pipewire.nix
+    ./networking.nix
+    ./powerManagement.nix
+    ./lemurs.nix
+  ];
 
 }

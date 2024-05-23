@@ -7,14 +7,15 @@
 
     #wayland.windowManager.hyprland.enable = true;
 
-    	home.file.".config/hypr/hyprland.conf".source = ./hyprland.conf;
+    home.file.".config/hypr/hyprland.conf".source = ./hyprland.conf;
     # TODO: use specialization directly
     home.file.".config/hypr/monitor.conf" =
       if userConfig.system.specialization == "on-the-go" then {
-source = ./battery.conf;
+        source = ./battery.conf;
 
       } else {
-                source = ./external_monitor.conf;      };
+        source = ./external_monitor.conf;
+      };
 
     home.packages = with pkgs; [
       glib
@@ -26,11 +27,9 @@ source = ./battery.conf;
 
       hyprpaper # wallpaper
 
-# Screenshots
+      # Screenshots
       grim
       slurp
-
-
 
       xdg-utils
       xdg-desktop-portal

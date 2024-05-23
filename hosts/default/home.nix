@@ -12,6 +12,8 @@
   modules.alacritty.enable = true;
   modules.wezterm.enable = true;
 
+  modules.discord.enable = true;
+
   home.username = "user";
   home.homeDirectory = "/home/user";
   home.stateVersion = "23.11";
