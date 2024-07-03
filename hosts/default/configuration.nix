@@ -21,7 +21,8 @@
     #lemurs.enable = true;
   };
 
-  userConfig.system.lemurs.enable = true;
+  system.greetd.enable = true;
+  #  userConfig.system.lemurs.enable = true;
 
   services.xserver.enable = true;
   services.xserver.displayManager.startx.enable = true;
@@ -89,7 +90,7 @@
   users.users.user = {
     isNormalUser = true;
     extraGroups =
-      [ "wheel" "input" "networkmanager","seat" ]; # Enable ‘sudo’ for the user.
+      [ "wheel" "input" "networkmanager" "seat" ]; # Enable ‘sudo’ for the user.
     shell = pkgs.fish;
     packages = with pkgs; [
       # nix neovim language
@@ -123,7 +124,7 @@
     wget
     parted
 
-    lemurs
+    # lemurs
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

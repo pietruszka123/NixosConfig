@@ -5,6 +5,7 @@
     ./hyprland
     ./fish
     ./ranger
+    ./kitty
     ./alacritty
     ./wezterm
     ./dunst

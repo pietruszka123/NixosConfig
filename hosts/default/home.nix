@@ -10,7 +10,9 @@
 
   #Terminals
   modules.alacritty.enable = true;
-  modules.wezterm.enable = true;
+  #modules.wezterm.enable = true;
+  modules.kitty.enable = true;	
+
 
   modules.discord.enable = true;
 
