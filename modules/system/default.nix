@@ -6,6 +6,8 @@
     ./powerManagement.nix
     ./lemurs.nix
     ./greetd.nix
+    ./podman
+    ./steam
   ];
 
 }

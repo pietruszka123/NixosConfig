@@ -4,7 +4,7 @@
   imports = [ # Include the results of the hardware scan.
     inputs.home-manager.nixosModules.default
     ../../modules/system/default.nix
-
+    ./hardware-configuration.nix
   ];
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;

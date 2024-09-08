@@ -8,17 +8,18 @@
 
   modules.dunst.enable = true;
 
+  modules = { firefox.enable = true; };
+
   #Terminals
   modules.alacritty.enable = true;
   #modules.wezterm.enable = true;
-  modules.kitty.enable = true;	
-
+  modules.kitty.enable = true;
 
   modules.discord.enable = true;
 
   home.username = "user";
   home.homeDirectory = "/home/user";
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.05";
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
