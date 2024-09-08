@@ -10,6 +10,7 @@
     ./wezterm
     ./dunst
     ./discord
+    ./firefox
   ];
 
 }

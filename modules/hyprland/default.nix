@@ -31,11 +31,15 @@
       grim
       slurp
 
+      xwayland
+      wayland-protocols
+
       xdg-utils
       xdg-desktop-portal
       xdg-desktop-portal-gtk
       xdg-desktop-portal-hyprland
     ];
+
   };
 
 }
