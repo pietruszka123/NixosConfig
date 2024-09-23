@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
   options = {
     system.pipewire.enable = lib.mkEnableOption "enable pipewire module";
 
@@ -19,7 +25,9 @@
 
       extraConfig.pipewire = {
         "10-clock-rate" = {
-          "context.properties" = { "default.clock.rate" = 44100; };
+          "context.properties" = {
+            "default.clock.rate" = 44100;
+          };
         };
 
       };

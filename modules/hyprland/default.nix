@@ -1,4 +1,12 @@
-{ config, pkgs, stable-pkgs, lib, userConfig, ... }: {
+{
+  config,
+  pkgs,
+  stable-pkgs,
+  lib,
+  userConfig,
+  ...
+}:
+{
   options = {
     modules.hyprland.enable = lib.mkEnableOption "enable hyprland module";
   };
@@ -10,12 +18,15 @@
     home.file.".config/hypr/hyprland.conf".source = ./hyprland.conf;
     # TODO: use specialization directly
     home.file.".config/hypr/monitor.conf" =
-      if userConfig.system.specialization == "on-the-go" then {
-        source = ./battery.conf;
+      if userConfig.system.specialization == "on-the-go" then
+        {
+          source = ./battery.conf;
 
-      } else {
-        source = ./external_monitor.conf;
-      };
+        }
+      else
+        {
+          source = ./external_monitor.conf;
+        };
 
     home.packages = with pkgs; [
       glib

@@ -1,4 +1,10 @@
-{ config, inputs, lib, pkgs, ... }:
+{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
 
@@ -9,15 +15,20 @@
   ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+    supportedFilesystems = [ "ntfs" ];
+  };
 
   nixpkgs.config.allowUnfree = true;
 
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [
-	pkgs.xdg-desktop-portal-gtk
-	pkgs.xdg-desktop-portal-hyprland 
+    pkgs.xdg-desktop-portal-gtk
+    pkgs.xdg-desktop-portal-hyprland
   ];
 
   # System
@@ -39,6 +50,15 @@
     steam.enable = true;
   };
 
+  fileSystems."/mnt/windows-linux-coalition" = {
+    device = "/dev/nvme0n1p6";
+    fsType = "ntfs-3g";
+    options = [
+      "rw"
+      "uid=1000"
+    ]; # ! uid of user
+  };
+
   system.greetd.enable = true;
   #  userConfig.system.lemurs.enable = true;
 
@@ -51,11 +71,16 @@
     useGlobalPkgs = true;
     extraSpecialArgs = {
       inherit inputs;
-      userConfig = { system = { specialization = "default"; }; };
+      userConfig = {
+        system = {
+          specialization = "default";
+        };
+      };
     };
-    users = { "user" = import ./home.nix; };
+    users = {
+      "user" = import ./home.nix;
+    };
   };
-
 
   time.timeZone = "Europe/Warsaw";
 
@@ -70,7 +95,10 @@
   # };
 
   #Flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
 
@@ -78,7 +106,12 @@
 
   users.users.user = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "input" "networkmanager" "seat" ];
+    extraGroups = [
+      "wheel"
+      "input"
+      "networkmanager"
+      "seat"
+    ];
     shell = pkgs.fish;
     packages = with pkgs; [
       # nix neovim language
@@ -165,4 +198,3 @@
 
   system.stateVersion = "24.05"; # Did you read the comment?
 }
-

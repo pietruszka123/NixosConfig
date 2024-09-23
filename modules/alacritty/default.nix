@@ -1,7 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
-let cfg = config.modules.alacritty;
-in {
+let
+  cfg = config.modules.alacritty;
+in
+{
   options = {
     modules.alacritty.enable = lib.mkEnableOption "enable alacritty module";
   };

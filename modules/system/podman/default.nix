@@ -1,7 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
-let cfg = config.modules.podman;
-in {
+let
+  cfg = config.modules.podman;
+in
+{
   options = {
     modules.podman.enable = lib.mkEnableOption "enable podman module";
   };
@@ -15,7 +22,7 @@ in {
       };
     };
 
-environment.systemPackages = with pkgs; [ nvidia-podman ];
-	
+    environment.systemPackages = with pkgs; [ nvidia-podman ];
+
   };
 }

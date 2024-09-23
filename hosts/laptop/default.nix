@@ -1,7 +1,14 @@
-{ config, inputs, lib, pkgs, ... }:
+{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-  imports = [ # Include the results of the hardware scan.
+  imports = [
+    # Include the results of the hardware scan.
     inputs.home-manager.nixosModules.default
     ../../modules/system/default.nix
     ./hardware-configuration.nix
@@ -33,7 +40,11 @@
       system.nvidia.nvidia_prime = lib.mkForce "offload";
       home-manager.extraSpecialArgs = lib.mkForce {
         inherit inputs;
-        userConfig = { system = { specialization = "on-the-go"; }; };
+        userConfig = {
+          system = {
+            specialization = "on-the-go";
+          };
+        };
       };
 
       #hardware.nvidia = {
@@ -48,9 +59,15 @@
     useGlobalPkgs = true;
     extraSpecialArgs = {
       inherit inputs;
-      userConfig = { system = { specialization = "default"; }; };
+      userConfig = {
+        system = {
+          specialization = "default";
+        };
+      };
     };
-    users = { "user" = import ./home.nix; };
+    users = {
+      "user" = import ./home.nix;
+    };
   };
 
   # TODO: look at it
@@ -73,7 +90,10 @@
   # };
 
   #Flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
 
@@ -89,8 +109,12 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.user = {
     isNormalUser = true;
-    extraGroups =
-      [ "wheel" "input" "networkmanager" "seat" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel"
+      "input"
+      "networkmanager"
+      "seat"
+    ]; # Enable ‘sudo’ for the user.
     shell = pkgs.fish;
     packages = with pkgs; [
       # nix neovim language
@@ -170,4 +194,3 @@
   system.stateVersion = "23.11"; # Did you read the comment?
 
 }
-
