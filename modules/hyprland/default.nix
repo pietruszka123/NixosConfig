@@ -1,4 +1,4 @@
-{ config, pkgs, lib, userConfig, ... }: {
+{ config, pkgs, stable-pkgs, lib, userConfig, ... }: {
   options = {
     modules.hyprland.enable = lib.mkEnableOption "enable hyprland module";
   };

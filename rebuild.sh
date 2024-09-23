@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+[ "$UID" -eq 0 ] || exec sudo "$0" "$@"
+
 abs_path=$(readlink -f .)
 
 NIX_PATH="$abs_path"
