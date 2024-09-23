@@ -26,10 +26,9 @@
     services.xserver.videoDrivers = [ "nvidia" ]; # or "nvidiaLegacy470 etc.
 
     hardware = {
-      opengl = {
+      graphics = {
         enable = true;
-        driSupport = true;
-        driSupport32Bit = true;
+        enable32Bit = true;
       };
 
       nvidia = {

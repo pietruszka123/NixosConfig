@@ -14,6 +14,12 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [
+	pkgs.xdg-desktop-portal-gtk
+	pkgs.xdg-desktop-portal-hyprland 
+  ];
+
   # System
   system = {
     powerManagement.enable = false;
@@ -29,7 +35,7 @@
   };
 
   modules = {
-    podman.enable = true;
+    podman.enable = false;
     steam.enable = true;
   };
 
@@ -39,7 +45,7 @@
   services.xserver.enable = true;
   services.xserver.displayManager.startx.enable = true;
   programs.hyprland.enable = true;
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "Pc"; # Define your hostname.
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
@@ -50,8 +56,6 @@
     users = { "user" = import ./home.nix; };
   };
 
-  # TODO: look at it
-  # networking.hostName = "nixos"; # Define your hostname.
 
   time.timeZone = "Europe/Warsaw";
 
@@ -79,7 +83,7 @@
     packages = with pkgs; [
       # nix neovim language
       nil # lsp
-      nixfmt # formatter
+      nixfmt-rfc-style # formatter
 
       tofi # Tiny dynamic menu for Wayland
 
