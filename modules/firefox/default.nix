@@ -1,7 +1,15 @@
-{ config, lib, pkgs, inputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 
-let cfg = config.modules.firefox;
-in {
+let
+  cfg = config.modules.firefox;
+in
+{
   options = {
     modules.firefox.enable = lib.mkEnableOption "enable firefox module";
   };
@@ -18,7 +26,9 @@ in {
           id = 0;
           name = "default";
           isDefault = true;
-          settings = { "extensions.autoDisableScopes" = 0; };
+          settings = {
+            "extensions.autoDisableScopes" = 0;
+          };
 
           extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
             ublock-origin

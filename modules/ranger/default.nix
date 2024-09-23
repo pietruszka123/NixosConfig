@@ -1,7 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
-let cfg = config.modules.ranger;
-in {
+let
+  cfg = config.modules.ranger;
+in
+{
   options = {
     modules.ranger.enable = lib.mkEnableOption "enable ranger module";
   };

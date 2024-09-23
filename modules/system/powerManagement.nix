@@ -1,7 +1,12 @@
-{ config, lib, services, ... }: {
+{
+  config,
+  lib,
+  services,
+  ...
+}:
+{
   options = {
-    system.powerManagement.enable =
-      lib.mkEnableOption "enable powerManagment module";
+    system.powerManagement.enable = lib.mkEnableOption "enable powerManagment module";
     system.powerManagment.termald.enable = lib.mkEnableOption {
       default = true;
       description = "enable thermald";

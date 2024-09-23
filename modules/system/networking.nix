@@ -1,4 +1,5 @@
-{ config, lib, ... }: {
+{ config, lib, ... }:
+{
   options = {
     system.networking.enable = lib.mkEnableOption "enable pipewire module";
   };

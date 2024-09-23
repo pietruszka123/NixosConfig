@@ -1,7 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
-let cfg = config.modules.template;
-in {
+let
+  cfg = config.modules.template;
+in
+{
   options = {
     modules.template.enable = lib.mkEnableOption "enable template module";
   };

@@ -1,7 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
-let cfg = config.modules.discord;
-in {
+let
+  cfg = config.modules.discord;
+in
+{
   options = {
     modules.discord.enable = lib.mkEnableOption "enable template module";
   };
@@ -10,8 +17,7 @@ in {
     nixpkgs.overlays = [
       (self: super: {
         discord = super.discord.overrideAttrs (_: {
-          src = builtins.fetchTarball
-            "https://discord.com/api/download/stable?platform=linux&format=tar.gz";
+          src = builtins.fetchTarball "https://discord.com/api/download/stable?platform=linux&format=tar.gz";
         });
       })
     ];

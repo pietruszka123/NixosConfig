@@ -1,12 +1,17 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 let
   cfg = config.userConfig.system.lemurs;
   xcfg = config.services.xserver;
-in {
+in
+{
   options = {
-    userConfig.system.lemurs.enable =
-      lib.mkEnableOption "enable template module";
+    userConfig.system.lemurs.enable = lib.mkEnableOption "enable template module";
   };
   config = lib.mkIf cfg.enable {
     #    environment.etc."pam.d/lemurs".text = ''

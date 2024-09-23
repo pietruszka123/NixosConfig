@@ -8,7 +8,9 @@
 
   modules.dunst.enable = true;
 
-  modules = { firefox.enable = true; };
+  modules = {
+    firefox.enable = true;
+  };
 
   #Terminals
   modules.alacritty.enable = true;

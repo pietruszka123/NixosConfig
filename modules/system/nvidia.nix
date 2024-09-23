@@ -8,8 +8,7 @@
       default = "sync";
       description = "nvidia prime mode";
     };
-    system.nvidia.nvidiaBusId =
-      lib.mkOption { description = "nvidia pci bus"; };
+    system.nvidia.nvidiaBusId = lib.mkOption { description = "nvidia pci bus"; };
     system.nvidia.intelBusId = lib.mkOption {
       default = "";
       description = "intel pci bus";
@@ -32,13 +31,21 @@
       };
 
       nvidia = {
-        prime = (if config.system.nvidia.nvidia_prime == "sync" then {
-          sync.enable = true;
-        } else if config.system.nvidia.nvidia_prime == "offload" then {
-          offload.enable = lib.mkForce true;
-          offload.enableOffloadCmd = lib.mkForce true;
-        } else
-          { }) // {
+        prime =
+          (
+            if config.system.nvidia.nvidia_prime == "sync" then
+              {
+                sync.enable = true;
+              }
+            else if config.system.nvidia.nvidia_prime == "offload" then
+              {
+                offload.enable = lib.mkForce true;
+                offload.enableOffloadCmd = lib.mkForce true;
+              }
+            else
+              { }
+          )
+          // {
             nvidiaBusId = config.system.nvidia.nvidiaBusId;
             intelBusId = config.system.nvidia.intelBusId;
             amdgpuBusId = config.system.nvidia.amdBusId;
@@ -72,7 +79,7 @@
 
         # Optionally, you may need to select the appropriate driver version for your specific GPU.
         #package = config.boot.kernelPackages.nvidiaPackages.stable;
-	package = config.boot.kernelPackages.nvidiaPackages.beta;
+        package = config.boot.kernelPackages.nvidiaPackages.beta;
 
       };
     };
