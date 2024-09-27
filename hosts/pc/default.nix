@@ -25,11 +25,11 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  xdg.portal.enable = true;
-  xdg.portal.extraPortals = [
-    pkgs.xdg-desktop-portal-gtk
-    pkgs.xdg-desktop-portal-hyprland
-  ];
+  #xdg.portal.enable = true;
+  #xdg.portal.extraPortals = [
+  #  pkgs.xdg-desktop-portal-gtk
+  #  pkgs.xdg-desktop-portal-hyprland
+  #];
 
   # System
   system = {
@@ -64,7 +64,10 @@
 
   services.xserver.enable = true;
   services.xserver.displayManager.startx.enable = true;
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    package = inputs.nixpkgs-stable.legacyPackages.x86_64-linux.hyprland;
+  };
   networking.hostName = "Pc"; # Define your hostname.
   home-manager = {
     useUserPackages = true;
@@ -126,7 +129,7 @@
 
       hyfetch
 
-      xwaylandvideobridge # Utility to allow streaming Wayland windows to X applications
+      # xwaylandvideobridge # Utility to allow streaming Wayland windows to X applications
       waybar # TODO: replace with eww
       eww
 
@@ -135,6 +138,8 @@
       neovim
       #firefox
       tree
+
+      dolphin
 
       zulu17
     ];

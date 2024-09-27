@@ -12,6 +12,7 @@
     ./dunst
     ./discord
     ./firefox
+    ./neovim
   ];
 
 }
