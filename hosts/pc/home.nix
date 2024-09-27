@@ -2,13 +2,15 @@
 
 {
   imports = [ ../../modules ];
-  modules.hyprland.enable = true;
-  modules.fish.enable = true;
-  modules.ranger.enable = true;
-
-  modules.dunst.enable = true;
-
   modules = {
+    hyprland.enable = true;
+    fish.enable = true;
+    ranger.enable = true;
+
+    dunst.enable = true;
+
+    neovim.enable = true; # todo move to main config
+
     firefox.enable = true;
   };
 
@@ -40,11 +42,11 @@
     #package = pkgs.vanilla-dmz;
     #name = "Vanilla-DMZ";
     package = pkgs.catppuccin-cursors.mochaLavender;
-    name = "Catppuccin-Mocha-Lavender";
+    name = "catppuccin-Mocha-Lavender";
     size = 24;
     x11 = {
       enable = true;
-      defaultCursor = "Catppuccin-Mocha-Lavender";
+      defaultCursor = "catppuccin-Mocha-Lavender";
     };
   };
 }
