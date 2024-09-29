@@ -1,0 +1,11 @@
+{ ... }:
+{
+  imports = [
+
+    ./kitty
+    ./alacritty
+    ./wezterm
+
+  ];
+
+}

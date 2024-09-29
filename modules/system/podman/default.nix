@@ -22,7 +22,7 @@ in
       };
     };
 
-    environment.systemPackages = with pkgs; [ nvidia-podman ];
+    #environment.systemPackages = with pkgs; [ nvidia-podman ];
 
   };
 }

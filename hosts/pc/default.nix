@@ -46,7 +46,7 @@
   };
 
   modules = {
-    podman.enable = false;
+    podman.enable = true;
     steam.enable = true;
   };
 
@@ -120,8 +120,6 @@
       # nix neovim language
       nil # lsp
       nixfmt-rfc-style # formatter
-
-      tofi # Tiny dynamic menu for Wayland
 
       pavucontrol
 

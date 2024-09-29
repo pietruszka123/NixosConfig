@@ -12,6 +12,8 @@
     neovim.enable = true; # todo move to main config
 
     firefox.enable = true;
+
+    tofi.enable = true;
   };
 
   #Terminals
