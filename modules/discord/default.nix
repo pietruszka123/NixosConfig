@@ -22,8 +22,10 @@ in
       })
     ];
     home.packages = with pkgs; [
-      discord
-      betterdiscordctl
+      (discord.override {
+        withVencord = true;
+      })
+      #betterdiscordctl
 
     ];
 

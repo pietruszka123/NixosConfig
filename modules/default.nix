@@ -4,15 +4,14 @@
   imports = [
     ./packages
     ./hyprland
-    ./fish
+    ./shells
     ./ranger
-    ./kitty
-    ./alacritty
-    ./wezterm
+    ./terminals
     ./dunst
     ./discord
     ./firefox
     ./neovim
+    ./tofi
   ];
 
 }
