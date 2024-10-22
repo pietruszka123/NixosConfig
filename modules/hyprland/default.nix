@@ -42,7 +42,7 @@
       grim
       slurp
 
-      xwayland
+      #    xwayland
       wayland-protocols
 
       xdg-utils

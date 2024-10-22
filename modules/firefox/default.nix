@@ -37,6 +37,7 @@ in
             youtube-shorts-block
             return-youtube-dislikes
             shinigami-eyes
+            bitwarden
           ];
         };
       };

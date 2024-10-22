@@ -22,15 +22,21 @@
       pulse.enable = true;
 
       wireplumber.enable = true;
+      wireplumber.configPackages = [
+        (pkgs.writeTextDir "share/wireplumber/main.lua.d/99-alsa-lowlatency.lua" ''
+                    alsa_monitor.rules = {
+                      {
+                        matches = [{"alsa.card_name" = "Live! Cam Chat HD VF0790";}];
+                        apply_properties = {
+          		["audio.format"] = "S16LE",
+                          ["audio.rate"] = "96000", -- for USB soundcards it should be twice your desired rate
+                        ["api.alsa.period-size"] = 2,
+          	      },
+                      },
+                    }
+        '')
 
-      extraConfig.pipewire = {
-        "10-clock-rate" = {
-          "context.properties" = {
-            "default.clock.rate" = 44100;
-          };
-        };
-
-      };
+      ];
 
     };
   };
