@@ -14,6 +14,8 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    catppuccin.url = "github:catppuccin/nix";
   };
 
   outputs =
@@ -21,6 +23,7 @@
       self,
       nixpkgs,
       nixpkgs-stable,
+      catppuccin,
       ...
     }@inputs:
     let
@@ -43,6 +46,16 @@
           };
           modules = [ ./hosts/pc ];
         };
+      };
+
+      devShells.${system}.default = pkgs.mkShell {
+        nativeBuildInputs = with pkgs; [
+          nil
+          hyprls
+          nixfmt-rfc-style
+
+        ];
+
       };
 
     };

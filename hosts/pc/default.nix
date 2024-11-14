@@ -10,7 +10,7 @@
 
   imports = [
     inputs.home-manager.nixosModules.default
-    ../../modules/system/default.nix
+    ../../modules/nixos/default.nix
     ./hardware-configuration.nix
   ];
 
@@ -23,13 +23,16 @@
     supportedFilesystems = [ "ntfs" ];
   };
 
+  #TODO: make it work from home manager
+  environment.variables.EDITOR = "nvim";
+
   nixpkgs.config.allowUnfree = true;
 
-  #xdg.portal.enable = true;
-  #xdg.portal.extraPortals = [
-  #  pkgs.xdg-desktop-portal-gtk
-  #  pkgs.xdg-desktop-portal-hyprland
-  #];
+  #  xdg.portal.enable = true;
+  #  xdg.portal.extraPortals = [
+  #    pkgs.xdg-desktop-portal-gtk
+  #    pkgs.xdg-desktop-portal-hyprland
+  #  ];
 
   # System
   system = {
@@ -42,14 +45,24 @@
     };
     pipewire.enable = true;
     #lemurs.enable = true;
+    greetd.enable = true;
 
   };
 
   modules = {
     podman.enable = true;
     steam.enable = true;
+    ssh.enable = true;
+    transmission.enable = true;
   };
-
+  programs = {
+    fish.enable = true;
+    hyprland = {
+      enable = true;
+      package = inputs.nixpkgs-stable.legacyPackages.x86_64-linux.hyprland;
+      xwayland.enable = true;
+    };
+  };
   fileSystems."/mnt/windows-linux-coalition" = {
     device = "/dev/nvme0n1p6";
     fsType = "ntfs-3g";
@@ -58,16 +71,19 @@
       "uid=1000"
     ]; # ! uid of user
   };
-
-  system.greetd.enable = true;
+  # fileSystems."/mnt/d" = {
+  #   device = "/dev/sdc3";
+  #   fsType = "ntfs-3g";
+  #   options = [
+  #     "rw"
+  #     "uid=1000"
+  #   ]; # ! uid of user
+  # };
   #  userConfig.system.lemurs.enable = true;
 
   services.xserver.enable = true;
   services.xserver.displayManager.startx.enable = true;
-  programs.hyprland = {
-    enable = true;
-    package = inputs.nixpkgs-stable.legacyPackages.x86_64-linux.hyprland;
-  };
+
   networking.hostName = "Pc"; # Define your hostname.
   home-manager = {
     useUserPackages = true;
@@ -85,7 +101,10 @@
     };
   };
 
-  time.timeZone = "Europe/Warsaw";
+  time = {
+    timeZone = "Europe/Warsaw";
+    hardwareClockInLocalTime = true;
+  };
 
   nix.optimise.automatic = true;
 
@@ -103,10 +122,6 @@
     "flakes"
   ];
 
-  boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
-
-  programs.fish.enable = true;
-
   users.users.user = {
     isNormalUser = true;
     extraGroups = [
@@ -117,21 +132,15 @@
     ];
     shell = pkgs.fish;
     packages = with pkgs; [
-      # nix neovim language
-      nil # lsp
       nixfmt-rfc-style # formatter
 
       pavucontrol
 
-      prismlauncher
-
       hyfetch
 
-      # xwaylandvideobridge # Utility to allow streaming Wayland windows to X applications
-      waybar # TODO: replace with eww
+      xwaylandvideobridge # Utility to allow streaming Wayland windows to X applications
+      waybar       
       eww
-
-      starship
 
       neovim
       #firefox
@@ -139,7 +148,9 @@
 
       dolphin
 
-      zulu17
+
+      heroic #TODO: move to home manager config
+
     ];
   };
 
@@ -165,11 +176,6 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
