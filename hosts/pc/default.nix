@@ -46,7 +46,7 @@
     pipewire.enable = true;
     #lemurs.enable = true;
     greetd.enable = true;
-
+    bluetooth.enable = true;
   };
 
   modules = {
@@ -54,6 +54,7 @@
     steam.enable = true;
     ssh.enable = true;
     transmission.enable = true;
+    flatpak.enable = true;
   };
   programs = {
     fish.enable = true;
@@ -139,7 +140,7 @@
       hyfetch
 
       xwaylandvideobridge # Utility to allow streaming Wayland windows to X applications
-      waybar       
+      waybar
       eww
 
       neovim
@@ -148,8 +149,7 @@
 
       dolphin
 
-
-      heroic #TODO: move to home manager config
+      heroic # TODO: move to home manager config
 
     ];
   };

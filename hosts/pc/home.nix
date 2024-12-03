@@ -42,8 +42,13 @@
     discord.enable = true;
     krita.enable = true;
 
-
     prism-launcher.enable = true;
+
+    vlc.enable = true;
+    game_launchers = {
+      r2modman.enable = true;
+
+    };
   };
 
   #programs.atuin = {
@@ -58,40 +63,37 @@
   programs.home-manager.enable = true;
 
   fonts.fontconfig.enable = true;
-  home.packages = [
-    pkgs.mgba
-    pkgs.gitkraken
-    pkgs.unzip
-    pkgs.nwg-look
-    pkgs.go
-    pkgs.playerctl
-    pkgs.pulsemixer
+  home.packages = with pkgs; [
+    mgba
+    gitkraken
+    unzip
+    nwg-look
+    go
+    playerctl
+    pulsemixer
 
-    pkgs.tmux
+    tmux
 
-    (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; })
+    eza
 
-    (pkgs.callPackage ../../packages/wayland-push-to-talk.nix { })
+    nerd-fonts.fira-code
 
+    (callPackage ../../packages/wayland-push-to-talk.nix { })
+
+    ryujinx
   ];
   catppuccin = {
-    #    enable = true;
     flavor = "mocha";
     accent = "lavender";
     pointerCursor.enable = true;
   };
   gtk.catppuccin.enable = true;
   qt.style.catppuccin.enable = true;
-  # home.pointerCursor = {
-  #   gtk.enable = true;
-  #   #package = pkgs.vanilla-dmz;
-  #   #name = "Vanilla-DMZ";
-  #   package = pkgs.catppuccin-cursors.mochaLavender;
-  #   name = "catppuccin-Mocha-Lavender";
-  #   size = 24;
-  #   x11 = {
-  #     enable = true;
-  #     defaultCursor = "catppuccin-Mocha-Lavender";
-  #   };
-  # };
+
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    BROWSER = "firefox";
+    TERMINAL = "alacritty";
+  };
+
 }

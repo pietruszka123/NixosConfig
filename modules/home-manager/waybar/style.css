@@ -42,7 +42,7 @@
 #battery,
 #pulseaudio,
 #custom-lock,
-#custom-power,#network {
+#custom-power,#network,#bluetooth {
   background-color: @surface0;
   padding: 0.5rem 1rem;
   margin: 5px 0;

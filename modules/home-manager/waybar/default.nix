@@ -21,6 +21,11 @@ in
     );
     home.file.".config/waybar/style.css".source = ./style.css;
     home.file.".config/waybar/config".source = ./config;
+
+    home.packages = with pkgs; [
+      nerd-fonts.fantasque-sans-mono
+    ];
+
   };
 
 }

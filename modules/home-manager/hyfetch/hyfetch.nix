@@ -6,12 +6,18 @@
 }:
 
 let
-  cfg = config.modules.template;
+  cfg = config.modules.hyfetch;
 in
 {
   options = {
-    modules.template.enable = lib.mkEnableOption "enable template module";
+    modules.hyfetch.enable = lib.mkEnableOption "enable hyfetch module";
   };
-  config = lib.mkIf cfg.enable { };
+  config = lib.mkIf cfg.enable {
+
+    home.packagees = with pkgs; [
+      hyfetch
+    ];
+
+  };
 
 }

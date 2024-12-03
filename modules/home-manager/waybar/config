@@ -5,7 +5,7 @@
     // Choose the order of the modules
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["custom/music"],
-    "modules-right": ["pulseaudio","network", "backlight", "clock", "tray", "custom/power"],
+    "modules-right": ["pulseaudio","network","bluetooth", "backlight", "clock", "tray", "custom/power"],
     "hyprland/workspaces": {
          "disable-scroll": true,
          "sort-by-name": true,
@@ -29,13 +29,12 @@
     },
     "network": {
         "format-wifi": "  {signalStrength}%",
-        "format-ethernet": "{ipaddr}/{cidr} ",
-        "format-linked": "󰊗",
+        "format-ethernet": "󰕒 {bandwidthUpBytes} 󰇚 {bandwidthDownBytes}  ",
+        "format-linked": "󰅛",
         "format-disconnected": "⚠",
         "format-alt": "{ipaddr}/{cidr}"
     },
     "clock": {
-       // "timezone": "Asia/Dubai",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": "󰃭 {:%d/%m/%Y}",
         "format": "  {:%H:%M}"
@@ -58,7 +57,7 @@
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "{icon} {volume}%",
+        "format": "{icon}  {volume}%",
         "format-muted": "",
         "format-icons": {
             "default": ["", "", " "]
@@ -74,5 +73,10 @@
         "tooltip": false,
         "on-click": "wlogout &",
         "format": "⏻"
+    },
+    "bluetooth":{
+	"on-click":"overskride",
+	"format": "󰂯 {num_connections}"
     }
+
 }

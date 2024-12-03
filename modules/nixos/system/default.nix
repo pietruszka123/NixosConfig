@@ -7,6 +7,7 @@
     ./powerManagement.nix
     ./lemurs
     ./greetd.nix
+    ./bluetooth.nix
   ];
 
 }

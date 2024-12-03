@@ -52,8 +52,7 @@
       hyprpaper # wallpaper
 
       # Screenshots
-      grim
-      slurp
+      grimblast 
 
       #    xwayland
       wayland-protocols

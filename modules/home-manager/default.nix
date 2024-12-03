@@ -14,5 +14,7 @@
     ./atuin
     ./krita.nix
     ./prism-launcher.nix
+    ./vlc.nix
+    ./game_launchers
   ];
 }

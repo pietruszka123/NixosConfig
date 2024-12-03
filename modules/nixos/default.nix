@@ -6,6 +6,7 @@
     ./ssh.nix
     ./podman.nix
     ./packages
+    ./flatpak.nix
   ];
 
 }
