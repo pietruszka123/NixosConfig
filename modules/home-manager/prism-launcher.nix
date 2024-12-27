@@ -21,6 +21,7 @@ in
         jdks = [
           graalvm-ce
           zulu17
+	  zulu8
         ];
       })
 

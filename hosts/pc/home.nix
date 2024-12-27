@@ -45,10 +45,16 @@
     prism-launcher.enable = true;
 
     vlc.enable = true;
+    mpv.enable = true;
+    obsidian.enable = true;
     game_launchers = {
       r2modman.enable = true;
 
+      ryujinx.enable = true;
+
     };
+    wlogout.enable = true;
+    wine.enable = true;
   };
 
   #programs.atuin = {
@@ -69,18 +75,21 @@
     unzip
     nwg-look
     go
-    playerctl
     pulsemixer
 
     tmux
 
     eza
+    unar
+    linux-wifi-hotspot
+    mate.engrampa
 
     nerd-fonts.fira-code
 
     (callPackage ../../packages/wayland-push-to-talk.nix { })
 
-    ryujinx
+    alvr
+
   ];
   catppuccin = {
     flavor = "mocha";

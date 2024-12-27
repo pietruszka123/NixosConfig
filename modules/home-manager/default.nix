@@ -14,7 +14,11 @@
     ./atuin
     ./krita.nix
     ./prism-launcher.nix
+    ./wlogout.nix
     ./vlc.nix
     ./game_launchers
+    ./obsidian.nix
+    ./wine.nix
+    ./mpv.nix
   ];
 }

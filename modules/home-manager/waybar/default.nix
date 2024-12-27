@@ -24,6 +24,7 @@ in
 
     home.packages = with pkgs; [
       nerd-fonts.fantasque-sans-mono
+      playerctl
     ];
 
   };

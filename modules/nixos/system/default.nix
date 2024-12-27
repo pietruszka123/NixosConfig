@@ -8,6 +8,7 @@
     ./lemurs
     ./greetd.nix
     ./bluetooth.nix
+    ./opentabletdriver.nix
   ];
 
 }

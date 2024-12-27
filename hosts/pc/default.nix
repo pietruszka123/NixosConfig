@@ -19,7 +19,13 @@
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
-    };
+    #   minegrub-theme = {
+    #     enable = true;
+    #     splash = "100% Flakes!";
+    #     background = "background_options/1.8  - [Classic Minecraft].png";
+    #     boot-options-count = 4;
+    #   };
+     };
     supportedFilesystems = [ "ntfs" ];
   };
 
@@ -47,6 +53,8 @@
     #lemurs.enable = true;
     greetd.enable = true;
     bluetooth.enable = true;
+    openvpn.enable = true;
+    opentabletdriver.enable = true;
   };
 
   modules = {
@@ -55,12 +63,15 @@
     ssh.enable = true;
     transmission.enable = true;
     flatpak.enable = true;
+    alvr.enable = true;
+
   };
+
   programs = {
     fish.enable = true;
     hyprland = {
       enable = true;
-      package = inputs.nixpkgs-stable.legacyPackages.x86_64-linux.hyprland;
+      # package = inputs.nixpkgs-stable.legacyPackages.x86_64-linux.hyprland;
       xwayland.enable = true;
     };
   };
@@ -132,6 +143,7 @@
       "seat"
     ];
     shell = pkgs.fish;
+    useDefaultShell = true;
     packages = with pkgs; [
       nixfmt-rfc-style # formatter
 
@@ -152,6 +164,12 @@
       heroic # TODO: move to home manager config
 
     ];
+  };
+
+  programs.git = {
+    enable = true;
+    lfs.enable = true;
+
   };
 
   # List packages installed in system profile. To search, run:
@@ -203,7 +221,7 @@
   # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
   # and migrated your data accordingly.
   #
-  # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion . 
+  # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
 
   system.stateVersion = "24.05"; # Did you read the comment?
 }
