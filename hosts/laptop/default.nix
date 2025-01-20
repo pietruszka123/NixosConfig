@@ -98,7 +98,7 @@
   boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
 
   # Enable CUPS to print documents.
-  # services.printing.enable = true; 
+  # services.printing.enable = true;
 
   programs.fish.enable = true;
   # zsh

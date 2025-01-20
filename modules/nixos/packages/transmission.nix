@@ -15,7 +15,7 @@ in
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       transmission_4-gtk
-
+      transgui
     ];
 
     #    services.transmission = {

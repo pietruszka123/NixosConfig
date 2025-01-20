@@ -28,7 +28,8 @@ in
           action = "systemctl reboot";
           text = "Reboot";
           keybind = "r";
-        }{
+        }
+        {
           label = "suspend";
           action = "systemctl suspend";
           text = "Sleep";

@@ -44,15 +44,18 @@
     home.packages = with pkgs; [
       glib
 
+      hyprland-qtutils
+
       # Clipboard
       wl-clipboard
+      xclip
       cliphist
       wl-clip-persist
 
       hyprpaper # wallpaper
 
       # Screenshots
-      grimblast 
+      grimblast
 
       #    xwayland
       wayland-protocols
@@ -61,7 +64,6 @@
       xdg-desktop-portal
       xdg-desktop-portal-gtk
       xdg-desktop-portal-hyprland
-
 
       # hyprpolkitagent
     ];

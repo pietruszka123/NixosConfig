@@ -17,11 +17,15 @@ in
     home.packages = with pkgs; [
 
       (prismlauncher.override {
+        additionalLibs = [
+          glfw3-minecraft
+
+        ];
         # Change Java runtimes available to Prism Launcher
         jdks = [
           graalvm-ce
           zulu17
-	  zulu8
+          zulu8
         ];
       })
 

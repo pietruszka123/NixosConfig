@@ -18,7 +18,11 @@
     shells.fish.enable = true;
     ranger.enable = true;
 
-    dunst.enable = true;
+    #dunst.enable = true;
+    notification-daemon = {
+      swaync.enable = true;
+
+    };
 
     firefox.enable = true;
 
@@ -55,6 +59,8 @@
     };
     wlogout.enable = true;
     wine.enable = true;
+
+    qbittorrent.enable = true;
   };
 
   #programs.atuin = {
@@ -73,6 +79,8 @@
     mgba
     gitkraken
     unzip
+    zip
+
     nwg-look
     go
     pulsemixer
@@ -88,16 +96,18 @@
 
     (callPackage ../../packages/wayland-push-to-talk.nix { })
 
-    alvr
+    # alvr
 
   ];
   catppuccin = {
     flavor = "mocha";
     accent = "lavender";
-    pointerCursor.enable = true;
+    cursors.enable = true;
+    kvantum.enable = true;
+    gtk.enable = true;
   };
-  gtk.catppuccin.enable = true;
-  qt.style.catppuccin.enable = true;
+  #gtk.catppuccin.enable = true;
+  #qt.style.catppuccin.enable = true;
 
   home.sessionVariables = {
     EDITOR = "nvim";

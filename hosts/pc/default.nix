@@ -14,18 +14,25 @@
     ./hardware-configuration.nix
   ];
 
+  #FIXME electron build error fix
+  nixpkgs.overlays = [
+    (self: super: {
+      electron_31 = self.electron;
+    })
+  ];
+
   # Use the systemd-boot EFI boot loader.
   boot = {
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
-    #   minegrub-theme = {
-    #     enable = true;
-    #     splash = "100% Flakes!";
-    #     background = "background_options/1.8  - [Classic Minecraft].png";
-    #     boot-options-count = 4;
-    #   };
-     };
+      #   minegrub-theme = {
+      #     enable = true;
+      #     splash = "100% Flakes!";
+      #     background = "background_options/1.8  - [Classic Minecraft].png";
+      #     boot-options-count = 4;
+      #   };
+    };
     supportedFilesystems = [ "ntfs" ];
   };
 
@@ -63,7 +70,7 @@
     ssh.enable = true;
     transmission.enable = true;
     flatpak.enable = true;
-    alvr.enable = true;
+    #alvr.enable = true;
 
   };
 

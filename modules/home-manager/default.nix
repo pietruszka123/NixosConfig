@@ -20,5 +20,7 @@
     ./obsidian.nix
     ./wine.nix
     ./mpv.nix
+    ./notification-daemon
+    ./qbittorrent.nix
   ];
 }
