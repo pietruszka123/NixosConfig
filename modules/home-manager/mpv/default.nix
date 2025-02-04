@@ -18,10 +18,15 @@ in
 
       (mpv.override {
 
-        scripts = with pkgs; [ mpvScripts.mpv-osc-tethys ];
+        scripts = with pkgs; [
+          mpvScripts.mpv-osc-tethys
+          mpvScripts.thumbnail
+        ];
 
       })
     ];
+    home.file.".config/mpv/mpv.conf".source = ./mpv.conf; 
+
 
   };
 

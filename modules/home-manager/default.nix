@@ -19,8 +19,9 @@
     ./game_launchers
     ./obsidian.nix
     ./wine.nix
-    ./mpv.nix
+    ./mpv
     ./notification-daemon
     ./qbittorrent.nix
+    ./bottles.nix
   ];
 }

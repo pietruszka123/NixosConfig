@@ -61,6 +61,7 @@
     wine.enable = true;
 
     qbittorrent.enable = true;
+    bottles.enable = true;
   };
 
   #programs.atuin = {
