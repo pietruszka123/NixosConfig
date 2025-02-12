@@ -68,6 +68,8 @@ in
           "inhibitors"
           "title"
           "dnd"
+	  "buttons-grid"
+	  "mpris"
           "notifications"
         ];
         widget-config = {
@@ -95,7 +97,7 @@ in
           "buttons-grid" = {
             actions = [
               {
-                label = "TEST";
+                label = "toggle wifi";
                 type = "toggle";
                 active = true;
                 command = "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && nmcli radio wifi on || nmcli radio wifi off'";

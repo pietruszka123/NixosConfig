@@ -23,5 +23,6 @@
     ./notification-daemon
     ./qbittorrent.nix
     ./bottles.nix
+    ./wallpaper
   ];
 }

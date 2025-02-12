@@ -37,6 +37,9 @@ in
       python3
 
       nil
+
+      nixd
+
       lua-language-server
       ripgrep
     ];

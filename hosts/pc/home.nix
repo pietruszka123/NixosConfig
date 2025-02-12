@@ -15,7 +15,14 @@
       enable = true;
       additional_config = ./hyprland.conf;
     };
+    wallpaper = {
+      enable = true;
+
+      hyprpaper.enable = true;
+    };
+
     shells.fish.enable = true;
+    shells.any-nix-shell.enable = true;
     ranger.enable = true;
 
     #dunst.enable = true;
