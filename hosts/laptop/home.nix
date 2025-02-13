@@ -8,6 +8,7 @@
 
   modules.dunst.enable = true;
 
+
   #Terminals
   modules.alacritty.enable = true;
   #modules.wezterm.enable = true;

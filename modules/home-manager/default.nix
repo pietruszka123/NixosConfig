@@ -23,6 +23,7 @@
     ./notification-daemon
     ./qbittorrent.nix
     ./bottles.nix
+    ./hyfetch
     ./wallpaper
   ];
 }

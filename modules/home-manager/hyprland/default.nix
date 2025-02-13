@@ -36,9 +36,14 @@
         };
 
     home.file.".config/hypr/additional_config.conf" =
-      lib.mkIf (config.modules.hyprland.additional_config != null)
+      if (config.modules.hyprland.additional_config != null) then
         {
           source = config.modules.hyprland.additional_config;
+        }
+      else
+        {
+          text = "";
+
         };
 
     home.packages = with pkgs; [

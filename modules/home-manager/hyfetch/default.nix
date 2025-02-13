@@ -14,7 +14,9 @@ in
   };
   config = lib.mkIf cfg.enable {
 
-    home.packagees = with pkgs; [
+    home.file.".config/neofetch/config.conf".source = ./config.conf;
+
+    home.packages = with pkgs; [
       hyfetch
     ];
 

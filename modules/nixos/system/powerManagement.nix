@@ -27,7 +27,7 @@
         USB_EXCLUDE_PHONE = 1;
       };
     };
-    services.auto-cpufreq.enable = true;
+    services.auto-cpufreq.enable = false;
 
   };
 }

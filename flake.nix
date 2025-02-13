@@ -40,6 +40,13 @@
           };
           modules = [ ./hosts/laptop ];
         };
+        laptop2 = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+          };
+          modules = [ ./hosts/laptop2 ];
+        };
+
         pc = nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit inputs;
