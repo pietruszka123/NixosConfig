@@ -30,19 +30,21 @@
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
       stable-pkgs = nixpkgs-stable.legacyPackages.${system};
+
     in
     {
-
       nixosConfigurations = {
         laptop = nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit inputs;
+            inherit stable-pkgs;
           };
           modules = [ ./hosts/laptop ];
         };
         laptop2 = nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit inputs;
+            inherit stable-pkgs;
           };
           modules = [ ./hosts/laptop2 ];
         };
@@ -50,6 +52,7 @@
         pc = nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit inputs;
+            inherit stable-pkgs;
           };
           modules = [ ./hosts/pc ];
         };

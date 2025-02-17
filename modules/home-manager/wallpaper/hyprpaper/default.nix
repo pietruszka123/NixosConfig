@@ -20,37 +20,41 @@ in
       ".config/hypr/hyprpaper.conf".source = ./hyprpaper.conf;
     };
 
-    # systemd.user = {
-    #   services = {
-    #     "timed-wallpaper" = {
-    #       script = [
-    #         ''
-    #           	if [ $(date +"%H") -ge ${time} ]; then
-    #           	wallpaper=${wallpaper.evening} 
-    #           	else
-    #           	wallpaper=${wallpaper.day}
-    #           	fi
-    #           	${pkgs.hyprland}/bin/hyprctl hyprpaper reload ,"$wallpaper.evening"
-    #           	''
-    #       ];
-    #
-    #       Unit = {
-    #         Description = "Changes wallper based on time";
-    #       };
-    #
-    #       serviceConfig = {
-    #         Type = "oneshot";
-    #
-    #       };
-    #
-    #     };
-    #
-    #   };
-    #   timers = { };
-    # };
+    systemd.user = {
+      timers = {
+        "timed-wallpaper" = {
+
+        };
+
+      };
+
+      services = {
+        "timed-wallpaper" = {
+          Service = {
+            ExecStart = "${pkgs.writeShellScript "update-wallpaper" ''
+              	if [ $(date +"%H") -ge ${time} ]; then
+              	wallpaper=${wallpaper.evening} 
+              	else
+              	wallpaper=${wallpaper.day}
+              	fi
+              	${pkgs.hyprland}/bin/hyprctl hyprpaper reload ,"$wallpaper"
+              	''}";
+          };
+          Unit = {
+            Description = "Changes wallper based on time";
+          };
+
+          serviceConfig = {
+            Type = "oneshot";
+
+          };
+
+        };
+
+      };
+    };
     home.packages = with pkgs; [
       hyprpaper
-      
 
     ];
   };

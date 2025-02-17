@@ -19,9 +19,13 @@
   config = lib.mkIf config.modules.hyprland.enable {
     #programs.hyprland.enable = true;
 
-    #wayland.windowManager.hyprland.enable = true;
-
-    home.file.".config/hypr/hyprland.conf".source = ./hyprland.conf;
+    wayland.windowManager.hyprland = {
+      enable = true;
+      systemd.enable = true;
+      xwayland.enable = true;
+      extraConfig = builtins.readFile ./hyprland.conf;
+    };
+    # home.file.".config/hypr/hyprland.conf".source = ./hyprland.conf;
     home.file.".config/hypr/app_rules.conf".source = ./app_rules.conf;
     # TODO: use specialization directly
     home.file.".config/hypr/monitor.conf" =

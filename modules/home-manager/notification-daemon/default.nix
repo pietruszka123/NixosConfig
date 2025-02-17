@@ -2,5 +2,6 @@
 {
   imports = [
     ./swaync.nix
+    ./dunst
   ];
 }

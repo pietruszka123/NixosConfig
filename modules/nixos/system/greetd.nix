@@ -6,9 +6,9 @@
 }:
 {
   options = {
-    system.greetd.enable = lib.mkEnableOption "enable greetd module";
+    systemModule.greetd.enable = lib.mkEnableOption "enable greetd module";
   };
-  config = lib.mkIf config.system.greetd.enable {
+  config = lib.mkIf config.systemModule.greetd.enable {
     services.greetd = {
       enable = true;
       vt = 2;

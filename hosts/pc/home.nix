@@ -25,10 +25,9 @@
     shells.any-nix-shell.enable = true;
     ranger.enable = true;
 
-    #dunst.enable = true;
     notification-daemon = {
       swaync.enable = true;
-
+      dunst.enable = false;
     };
 
     firefox.enable = true;
@@ -41,6 +40,7 @@
         enable = true;
         default_editor = true;
       };
+      android-studio.enable = true;
     };
     waybar.enable = true;
 

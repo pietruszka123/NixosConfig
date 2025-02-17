@@ -5,11 +5,11 @@
 }:
 
 let
-  cfg = config.system.opentabletdriver;
+  cfg = config.systemModule.opentabletdriver;
 in
 {
   options = {
-    system.opentabletdriver.enable = lib.mkEnableOption "enable opentabletdriver module";
+    systemModule.opentabletdriver.enable = lib.mkEnableOption "enable opentabletdriver module";
   };
   config = lib.mkIf cfg.enable {
 

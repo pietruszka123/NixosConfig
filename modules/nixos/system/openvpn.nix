@@ -6,11 +6,11 @@
 }:
 
 let
-  cfg = config.system.openvpn;
+  cfg = config.systemModule.openvpn;
 in
 {
   options = {
-    system.openvpn.enable = lib.mkEnableOption "enable openvpn module";
+    systemModule.openvpn.enable = lib.mkEnableOption "enable openvpn module";
   };
   config = lib.mkIf cfg.enable {
 

@@ -6,14 +6,16 @@
 }:
 {
   options = {
-    system.powerManagement.enable = lib.mkEnableOption "enable powerManagment module";
-    system.powerManagment.termald.enable = lib.mkEnableOption {
-      default = true;
-      description = "enable thermald";
+    systemModule.powerManagement = {
+      enable = lib.mkEnableOption "enable powerManagment module";
+      termald.enable = lib.mkEnableOption {
+        default = true;
+        description = "enable thermald";
+      };
     };
   };
 
-  config = lib.mkIf config.system.powerManagement.enable {
+  config = lib.mkIf config.systemModule.powerManagement.enable {
     powerManagement.enable = true;
 
     services.thermald.enable = config.system.powerManagment.termald.enable;

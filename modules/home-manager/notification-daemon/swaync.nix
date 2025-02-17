@@ -16,6 +16,10 @@ in
 
     services.swaync = {
       enable = true;
+      # style = pkgs.fetchurl {
+      #   url = "https://github.com/catppuccin/swaync/releases/download/v0.2.3/mocha.css";
+      #   hash = "sha256-Hie/vDt15nGCy4XWERGy1tUIecROw17GOoasT97kIfc=";
+      # };
       settings = {
         positionX = "right";
         positionY = "top";
@@ -68,8 +72,8 @@ in
           "inhibitors"
           "title"
           "dnd"
-	  "buttons-grid"
-	  "mpris"
+          "buttons-grid"
+          "mpris"
           "notifications"
         ];
         widget-config = {

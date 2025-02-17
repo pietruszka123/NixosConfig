@@ -7,11 +7,11 @@
 }:
 
 let
-  cfg = config.modules.dunst;
+  cfg = config.modules.notification-daemon.dunst;
 in
 {
   options = {
-    modules.dunst.enable = lib.mkEnableOption "enable dunst module";
+    modules.notification-daemon.dunst.enable = lib.mkEnableOption "enable dunst module";
   };
   config = lib.mkIf cfg.enable {
     services.dunst = {

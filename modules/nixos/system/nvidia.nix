@@ -2,24 +2,26 @@
 
 {
   options = {
-    system.nvidia.enable = lib.mkEnableOption "enable nvidia module";
+    systemModule.nvidia = {
+      enable = lib.mkEnableOption "enable nvidia module";
 
-    system.nvidia.nvidia_prime = lib.mkOption {
-      default = "sync";
-      description = "nvidia prime mode";
-    };
-    system.nvidia.nvidiaBusId = lib.mkOption { description = "nvidia pci bus"; };
-    system.nvidia.intelBusId = lib.mkOption {
-      default = "";
-      description = "intel pci bus";
-    };
-    system.nvidia.amdBusId = lib.mkOption {
-      default = "";
-      description = "amd pci bus";
+      nvidia_prime = lib.mkOption {
+        default = "sync";
+        description = "nvidia prime mode";
+      };
+      nvidiaBusId = lib.mkOption { description = "nvidia pci bus"; };
+      intelBusId = lib.mkOption {
+        default = "";
+        description = "intel pci bus";
+      };
+      amdBusId = lib.mkOption {
+        default = "";
+        description = "amd pci bus";
+      };
     };
   };
 
-  config = lib.mkIf config.system.nvidia.enable {
+  config = lib.mkIf config.systemModule.nvidia.enable {
     nixpkgs.config.allowUnfree = true;
 
     services.xserver.videoDrivers = [ "nvidia" ]; # or "nvidiaLegacy470 etc.
@@ -35,11 +37,11 @@
       nvidia = {
         prime =
           (
-            if config.system.nvidia.nvidia_prime == "sync" then
+            if config.systemModule.nvidia.nvidia_prime == "sync" then
               {
                 sync.enable = true;
               }
-            else if config.system.nvidia.nvidia_prime == "offload" then
+            else if config.systemModule.nvidia.nvidia_prime == "offload" then
               {
                 offload.enable = lib.mkForce true;
                 offload.enableOffloadCmd = lib.mkForce true;
@@ -48,9 +50,9 @@
               { }
           )
           // {
-            nvidiaBusId = config.system.nvidia.nvidiaBusId;
-            intelBusId = config.system.nvidia.intelBusId;
-            amdgpuBusId = config.system.nvidia.amdBusId;
+            nvidiaBusId = config.systemModule.nvidia.nvidiaBusId;
+            intelBusId = config.systemModule.nvidia.intelBusId;
+            amdgpuBusId = config.systemModule.nvidia.amdBusId;
           };
 
         # Modesetting is required.

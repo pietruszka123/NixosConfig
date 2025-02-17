@@ -6,10 +6,10 @@
 }:
 {
   options = {
-    system.pipewire.enable = lib.mkEnableOption "enable pipewire module";
+    systemModule.pipewire.enable = lib.mkEnableOption "enable pipewire module";
 
   };
-  config = lib.mkIf config.system.pipewire.enable {
+  config = lib.mkIf config.systemModule.pipewire.enable {
 
     security.rtkit.enable = true;
 

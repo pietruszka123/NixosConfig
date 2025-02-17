@@ -5,7 +5,6 @@
     ./shells
     ./ranger
     ./terminals
-    ./dunst
     ./discord
     ./firefox
     ./tofi

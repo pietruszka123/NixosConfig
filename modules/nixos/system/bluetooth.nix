@@ -6,11 +6,11 @@
 }:
 
 let
-  cfg = config.system.bluetooth;
+  cfg = config.systemModule.bluetooth;
 in
 {
   options = {
-    system.bluetooth.enable = lib.mkEnableOption "enable bluetooth module";
+    systemModule.bluetooth.enable = lib.mkEnableOption "enable bluetooth module";
   };
   config = lib.mkIf cfg.enable {
 

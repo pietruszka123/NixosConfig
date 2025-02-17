@@ -3,9 +3,27 @@
   inputs,
   lib,
   pkgs,
+  stable-pkgs,
   ...
 }:
+let
 
+  systemModule = {
+    powerManagement.enable = false;
+    networking.enable = true;
+    nvidia = {
+      enable = true;
+      nvidiaBusId = "PCI:1:00:0";
+      amdBusId = "PCI:15:00:0";
+    };
+    pipewire.enable = true;
+    #lemurs.enable = true;
+    greetd.enable = true;
+    bluetooth.enable = true;
+    openvpn.enable = true;
+    opentabletdriver.enable = true;
+  };
+in
 {
 
   imports = [
@@ -48,21 +66,9 @@
   #  ];
 
   # System
-  system = {
-    powerManagement.enable = false;
-    networking.enable = true;
-    nvidia = {
-      enable = true;
-      nvidiaBusId = "PCI:1:00:0";
-      amdBusId = "PCI:15:00:0";
-    };
-    pipewire.enable = true;
-    #lemurs.enable = true;
-    greetd.enable = true;
-    bluetooth.enable = true;
-    openvpn.enable = true;
-    opentabletdriver.enable = true;
-  };
+  # system = {inherit systemModule;};
+
+  systemModule = systemModule;
 
   modules = {
     podman.enable = true;
@@ -109,6 +115,12 @@
     useGlobalPkgs = true;
     extraSpecialArgs = {
       inherit inputs;
+      inherit stable-pkgs;
+      systemConfig = {
+
+        inherit systemModule;
+
+      };
       userConfig = {
         system = {
           specialization = "default";
