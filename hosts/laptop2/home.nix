@@ -21,15 +21,20 @@
     };
     shells.fish.enable = true;
     ranger.enable = true;
-    dunst.enable = false;
-   wallpaper = {
+    notification-daemon = {
+      swaync.enable = true;
+      dunst.enable = false;
+    };
+
+    wallpaper = {
       enable = true;
 
       hyprpaper.enable = true;
     };
-    
+    wlogout.enable = true;
 
     atuin.enable = true;
+
     terminals = {
       alacritty.enable = true;
       kitty.enable = false;
@@ -37,6 +42,7 @@
     };
     discord.enable = false;
     editors = {
+      android-studio.enable = true;
 
       neovim = {
         enable = true;

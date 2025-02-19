@@ -18,7 +18,7 @@
   config = lib.mkIf config.systemModule.powerManagement.enable {
     powerManagement.enable = true;
 
-    services.thermald.enable = config.system.powerManagment.termald.enable;
+    services.thermald.enable = config.systemModule.powerManagement.termald.enable;
 
     services.tlp = {
       enable = true;

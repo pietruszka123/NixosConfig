@@ -3,9 +3,27 @@
   inputs,
   lib,
   pkgs,
+  stable-pkgs,
   ...
 }:
+let
+  systemModule = {
+    powerManagement.enable = true;
+    networking.enable = true;
 
+    nvidia = {
+      enable = true;
+      nvidiaBusId = "PCI:1:00:0";
+      intelBusId = "PCI:0:2:0";
+    };
+    pipewire.enable = false;
+    #lemurs.enable = true;
+
+    greetd.enable = true;
+    bluetooth.enable = false;
+
+  };
+in
 {
   imports = [
     # Include the results of the hardware scan.
@@ -31,20 +49,8 @@
     ]; # ! uid of user
   };
   # System
-  system = {
-    powerManagement.enable = true;
-    networking.enable = true;
+  systemModule = systemModule;
 
-    nvidia = {
-      enable = true;
-      nvidiaBusId = "PCI:1:00:0";
-      intelBusId = "PCI:0:2:0";
-    };
-    pipewire.enable = false;
-    #lemurs.enable = true;
-
-    greetd.enable = true;
-  };
   modules.ssh.enable = true;
   modules.steam.enable = true;
 
@@ -60,9 +66,14 @@
   specialisation = {
     on-the-go.configuration = {
       system.nixos.tags = [ "on-the-go" ];
-      system.nvidia.nvidia_prime = lib.mkForce "offload";
+      systemModule.nvidia.nvidia_prime = lib.mkForce "offload";
       home-manager.extraSpecialArgs = lib.mkForce {
         inherit inputs;
+        inherit stable-pkgs;
+        systemConfig = {
+          inherit systemModule;
+        };
+
         userConfig = {
           system = {
             specialization = "on-the-go";
@@ -82,6 +93,13 @@
     useGlobalPkgs = true;
     extraSpecialArgs = {
       inherit inputs;
+      inherit stable-pkgs;
+      systemConfig = {
+
+        inherit systemModule;
+
+      };
+
       userConfig = {
         system = {
           specialization = "default";
@@ -93,7 +111,6 @@
     };
   };
 
-  # TODO: look at it
   # networking.hostName = "minecraft-server-laptop"; # Define your hostname.
   networking.hostName = "nixos"; # Define your hostname.
 

@@ -61,6 +61,7 @@ let
     backlight = {
       device = "intel_backlight";
       format = "{icon}";
+      tooltip-format = "{percent}%";
       format-icons = [
         ""
         ""
