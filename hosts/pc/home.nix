@@ -21,7 +21,10 @@
       hyprpaper.enable = true;
     };
 
-    shells.fish.enable = true;
+    shells = {
+      tlrc.enable = true;
+      fish.enable = true;
+    };
     shells.any-nix-shell.enable = true;
     ranger.enable = true;
 
