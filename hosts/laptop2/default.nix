@@ -54,7 +54,6 @@ in
   modules.ssh.enable = true;
   modules.steam.enable = true;
 
-  #  userConfig.system.lemurs.enable = true;
   services.fail2ban.enable = true;
 
   services.xserver.enable = false;
@@ -164,12 +163,7 @@ in
 
         hyfetch
 
-        #xwaylandvideobridge # Utility to allow streaming Wayland windows to X applications
-        #waybar # TODO: replace with eww
-        #eww
-
         neovim
-        #firefox
         tree
       ];
     };

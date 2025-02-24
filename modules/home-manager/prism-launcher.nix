@@ -20,7 +20,7 @@ in
         additionalLibs = [
           glfw3-minecraft
 
-          async-profiler
+          # async-profiler
         ];
         # Change Java runtimes available to Prism Launcher
         jdks = [

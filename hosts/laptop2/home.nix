@@ -19,7 +19,10 @@
 
       additional_config = ./hyprland.conf;
     };
-    shells.fish.enable = true;
+    shells = {
+      fish.enable = true;
+      tlrc.enable = true;
+    };
     ranger.enable = true;
     notification-daemon = {
       swaync.enable = true;
@@ -55,6 +58,8 @@
     hyfetch.enable = true;
 
     prism-launcher.enable = true;
+
+    game_launchers.heroic.enable = true;
   };
   home.username = "user";
   home.homeDirectory = "/home/user";
