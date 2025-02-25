@@ -77,6 +77,7 @@ in
     transmission.enable = true;
     flatpak.enable = true;
     #alvr.enable = true;
+    kdeconnect.enable = true;
 
   };
 

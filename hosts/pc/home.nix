@@ -63,7 +63,6 @@
     obsidian.enable = true;
     game_launchers = {
       r2modman.enable = true;
-
       ryujinx.enable = true;
 
     };
@@ -72,7 +71,8 @@
 
     qbittorrent.enable = true;
     bottles.enable = true;
-  };
+
+     };
 
   #programs.atuin = {
   #  enable = true;
@@ -109,6 +109,7 @@
 
     # alvr
 
+    mangohud
   ];
   catppuccin = {
     flavor = "mocha";
