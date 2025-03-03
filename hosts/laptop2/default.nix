@@ -48,6 +48,16 @@ in
       "uid=1000"
     ]; # ! uid of user
   };
+
+
+fileSystems = {
+  "/".options = [ "compress=zstd" ];
+  "/home".options = [ "compress=zstd" ];
+  "/nix".options = [ "compress=zstd" "noatime" ];
+};
+
+
+
   # System
   systemModule = systemModule;
 

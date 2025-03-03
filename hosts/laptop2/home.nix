@@ -14,6 +14,7 @@
   modules = {
     firefox.enable = true;
     tofi.enable = true;
+    obsidian.enable = true;
     hyprland = {
       enable = true;
 
@@ -43,7 +44,7 @@
       kitty.enable = false;
 
     };
-    discord.enable = false;
+    discord.enable = true;
     editors = {
       android-studio.enable = true;
 
@@ -70,7 +71,7 @@
 
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
-    #mgba
+    mgba
     gitkraken
     unzip
     #nwg-look
