@@ -10,4 +10,4 @@ function fish_greeting
 	#echo (set_color blue) '█' (set_color pink) '█' (set_color white) '█'
 end
 
-starship init fish | source
+#starship init fish | source

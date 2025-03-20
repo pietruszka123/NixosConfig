@@ -42,6 +42,7 @@ in
 
       lua-language-server
       ripgrep
+      taplo-lsp
     ];
 
   };

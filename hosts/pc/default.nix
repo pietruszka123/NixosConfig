@@ -4,6 +4,8 @@
   lib,
   pkgs,
   stable-pkgs,
+  hyprland-source,
+  zen-browser-source,
   ...
 }:
 let
@@ -32,12 +34,12 @@ in
     ./hardware-configuration.nix
   ];
 
-  #FIXME electron build error fix
-  nixpkgs.overlays = [
-    (self: super: {
-      electron_31 = self.electron;
-    })
-  ];
+  # #FIXME electron build error fix
+  # nixpkgs.overlays = [
+  #   (self: super: {
+  #     electron_31 = self.electron;
+  #   })
+  # ];
 
   # Use the systemd-boot EFI boot loader.
   boot = {
@@ -117,10 +119,11 @@ in
     extraSpecialArgs = {
       inherit inputs;
       inherit stable-pkgs;
+      inherit hyprland-source;
+      inherit zen-browser-source;
+
       systemConfig = {
-
         inherit systemModule;
-
       };
       userConfig = {
         system = {

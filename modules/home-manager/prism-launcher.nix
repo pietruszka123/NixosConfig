@@ -27,6 +27,7 @@ in
           graalvm-ce
           zulu17
           zulu8
+	  zulu21
         ];
       })
 

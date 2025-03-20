@@ -7,18 +7,15 @@
 }:
 
 let
-  cfg = config.modules.firefox;
+  cfg = config.modules.browsers.floorp;
 in
 {
   options = {
-    modules.firefox.enable = lib.mkEnableOption "enable firefox module";
+    modules.browsers.floorp.enable = lib.mkEnableOption "enable floorp module";
   };
   config = lib.mkIf cfg.enable {
-    home.sessionVariables = {
-      MOZ_ENABLE_WAYLAND = 1;
 
-    };
-    programs.firefox = {
+    programs.floorp = {
       enable = true;
 
       profiles = {
@@ -29,7 +26,6 @@ in
           settings = {
             "extensions.autoDisableScopes" = 0;
           };
-
 
           extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
             ublock-origin
@@ -43,7 +39,6 @@ in
         };
       };
     };
-
   };
 
 }

@@ -22,7 +22,11 @@
     };
 
     shells = {
-      tlrc.enable = true;
+      plugins = {
+        tlrc.enable = true;
+        starship.enable = true;
+        eza.enable = true;
+      };
       fish.enable = true;
     };
     shells.any-nix-shell.enable = true;
@@ -72,7 +76,15 @@
     qbittorrent.enable = true;
     bottles.enable = true;
 
-     };
+    browsers = {
+      floorp.enable = false;
+      zen.enable = true;
+    };
+
+    file-managers = {
+      nautilus.enable = true;
+    };
+  };
 
   #programs.atuin = {
   #  enable = true;

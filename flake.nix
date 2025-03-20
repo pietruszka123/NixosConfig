@@ -16,6 +16,10 @@
     };
 
     catppuccin.url = "github:catppuccin/nix";
+
+    hyprland.url = "github:hyprwm/Hyprland";
+
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
   };
 
   outputs =
@@ -24,12 +28,16 @@
       nixpkgs,
       nixpkgs-stable,
       catppuccin,
+      hyprland,
+      zen-browser,
       ...
     }@inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
       stable-pkgs = nixpkgs-stable.legacyPackages.${system};
+      hyprland-source = hyprland.packages.${system};
+      zen-browser-source = zen-browser.packages.${system};
 
     in
     {
@@ -38,6 +46,8 @@
           specialArgs = {
             inherit inputs;
             inherit stable-pkgs;
+            inherit hyprland-source;
+            inherit zen-browser-source;
           };
           modules = [ ./hosts/laptop ];
         };
@@ -45,6 +55,8 @@
           specialArgs = {
             inherit inputs;
             inherit stable-pkgs;
+            inherit hyprland-source;
+            inherit zen-browser-source;
           };
           modules = [ ./hosts/laptop2 ];
         };
@@ -53,6 +65,8 @@
           specialArgs = {
             inherit inputs;
             inherit stable-pkgs;
+            inherit hyprland-source;
+            inherit zen-browser-source;
           };
           modules = [ ./hosts/pc ];
         };

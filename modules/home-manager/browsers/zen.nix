@@ -3,23 +3,24 @@
   lib,
   pkgs,
   inputs,
+  zen-browser-source,
   ...
 }:
 
 let
-  cfg = config.modules.firefox;
+  cfg = config.modules.browsers.zen;
+
 in
 {
   options = {
-    modules.firefox.enable = lib.mkEnableOption "enable firefox module";
+    modules.browsers.zen.enable = lib.mkEnableOption "enable Zen browser module";
   };
-  config = lib.mkIf cfg.enable {
-    home.sessionVariables = {
-      MOZ_ENABLE_WAYLAND = 1;
 
-    };
-    programs.firefox = {
+  config = lib.mkIf cfg.enable {
+
+    programs.zen = {
       enable = true;
+      package = zen-browser-source.default;
 
       profiles = {
         default = {
@@ -28,8 +29,8 @@ in
           isDefault = true;
           settings = {
             "extensions.autoDisableScopes" = 0;
+	    "general.autoScroll" = 1;
           };
-
 
           extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
             ublock-origin

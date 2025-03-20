@@ -14,24 +14,27 @@ in
   };
   config = lib.mkIf cfg.enable {
 
-    home.file.".config/fish/config.fish".source = ./config.fish;
+    # home.file.".config/fish/config.fish".source = ./config.fish;
 
-    home.packages = with pkgs; [ starship ];
+    # home.packages = with pkgs; [ starship ];
 
-    # programs.fish = {
-    #   enable = true;
-    #   interactiveShellInit = ''
-    #     set fish_greeting # Disable greeting
-    #   '';
-    #   plugins = [
+    programs.fish = {
+      enable = true;
+      interactiveShellInit = builtins.readFile ./config.fish;
+      shellAliases = lib.mkMerge [
+        (lib.mkIf (config.modules.editors.neovim.enable == true) {
+          "v" = "nvim";
+        })
+      ];
+      #   plugins = [
 
-    #     {
-    #       name = "tide";
-    #       src = pkgs.fishPlugins.tide;
-    #     }
-    #   ];
+      #     {
+      #       name = "tide";
+      #       src = pkgs.fishPlugins.tide;
+      #     }
+      #   ];
 
-    # };
+    };
   };
 
 }

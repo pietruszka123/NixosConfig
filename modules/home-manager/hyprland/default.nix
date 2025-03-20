@@ -5,6 +5,7 @@
   stable-pkgs,
   lib,
   userConfig,
+  hyprland-source,
   ...
 }:
 {
@@ -21,6 +22,10 @@
 
     wayland.windowManager.hyprland = {
       enable = true;
+      
+      package = hyprland-source.hyprland;
+      portalPackage = hyprland-source.xdg-desktop-portal-hyprland;
+
       systemd.enable = true;
       xwayland.enable = true;
       extraConfig = builtins.readFile ./hyprland.conf;
@@ -72,7 +77,7 @@
       xdg-utils
       xdg-desktop-portal
       xdg-desktop-portal-gtk
-      xdg-desktop-portal-hyprland
+      # xdg-desktop-portal-hyprland
 
       # hyprpolkitagent
     ];

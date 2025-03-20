@@ -24,5 +24,7 @@
     ./bottles.nix
     ./hyfetch
     ./wallpaper
+    ./browsers
+    ./file-managers
   ];
 }
