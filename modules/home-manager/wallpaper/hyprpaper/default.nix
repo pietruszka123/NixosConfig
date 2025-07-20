@@ -21,9 +21,23 @@ in
     };
 
     systemd.user = {
+      enable = true;
       timers = {
         "timed-wallpaper" = {
+          Install = {
+            WantedBy = [ "timers.target" ];
+          };
+          Timer = {
 
+            OnBootSec = "0s";
+            OnCalendar = [
+              "*-*-* 6:00:00"
+              "*-*-* 19:00:00"
+            ];
+
+            Persistent = true;
+            Unit = "timed-wallpaper.service";
+          };
         };
 
       };
@@ -31,22 +45,19 @@ in
       services = {
         "timed-wallpaper" = {
           Service = {
+            Type = "oneshot";
+
             ExecStart = "${pkgs.writeShellScript "update-wallpaper" ''
               	if [ $(date +"%H") -ge ${time} ]; then
-              	wallpaper=${wallpaper.evening} 
+              	wallpaper=$1/wallpapers/${wallpaper.evening} 
               	else
-              	wallpaper=${wallpaper.day}
+              	wallpaper=$1/wallpapers/${wallpaper.day}
               	fi
               	${pkgs.hyprland}/bin/hyprctl hyprpaper reload ,"$wallpaper"
-              	''}";
+              	''} %h";
           };
           Unit = {
             Description = "Changes wallper based on time";
-          };
-
-          serviceConfig = {
-            Type = "oneshot";
-
           };
 
         };

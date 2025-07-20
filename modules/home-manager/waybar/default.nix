@@ -20,10 +20,13 @@ let
       "pulseaudio"
       "network"
       "bluetooth"
+      "custom/notification"
       "battery"
       "backlight"
       "clock"
       "tray"
+      "custom/lock"
+      "custom/power"
     ];
     "hyprland/workspaces" = {
       disable-scroll = true;
@@ -57,6 +60,19 @@ let
       tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
       format-alt = "󰃭 {:%d/%m/%Y}";
       format = "  {:%H:%M}";
+      calendar = {
+        mode = "year";
+        mode-mon-col = 3;
+        weeks-pos = "right";
+        on-scroll = 1;
+        format = {
+          "months" = "<span color='#ffead3'><b>{}</b></span>";
+          "days" = "<span color='#ecc6d9'><b>{}</b></span>";
+          "weeks" = "<span color='#99ffdd'><b>W{}</b></span>";
+          "weekdays" = "<span color='#ffcc66'><b>{}</b></span>";
+          "today" = "<span color='#ff6699'><b><u>{}</u></b></span>";
+        };
+      };
     };
     backlight = {
       device = "intel_backlight";
@@ -115,7 +131,7 @@ let
     };
     "custom/lock" = {
       tooltip = false;
-      on-click = "sh -c '(sleep 0.5s; swaylock --grace 0)' & disown";
+      on-click = "sh -c '(sleep 0.5s; hyprlock --immediate)' & disown";
       format = "";
     };
     "custom/power" = {
@@ -125,29 +141,53 @@ let
     };
     bluetooth = {
       on-click = "overskride";
+      format-off = "󰂲";
+      format-on = "󰂯";
+      format-connected = "󰂱 {num_connections}";
       format = "󰂯 {num_connections}";
+      tooltip-format-enumerate-connected = "{device_alias}\t{device_address}";
     };
-
+    "custom/notification" = {
+      "tooltip" = false;
+      "format" = "{icon}";
+      "format-icons" = {
+        "notification" = "<span foreground='red'><sup></sup></span>";
+        "none" = "";
+        "dnd-notification" = "<span foreground='red'><sup></sup></span>";
+        "dnd-none" = "";
+        "inhibited-notification" = "<span foreground='red'><sup></sup></span>";
+        "inhibited-none" = "";
+        "dnd-inhibited-notification" = "<span foreground='red'><sup></sup></span>";
+        "dnd-inhibited-none" = "";
+      };
+      "return-type" = "json";
+      "exec-if" = "which swaync-client";
+      "exec" = "swaync-client -swb";
+      "on-click" = "swaync-client -t -sw";
+      "on-click-right" = "swaync-client -d -sw";
+      "escape" = true;
+    };
   };
 
-  #TODO: change it to remove disabled modules
-  merge =
-    config: modules:
+  deleteValue =
+    arr: modules:
     let
-      f = f: s: f // { modules-right = (f.modules-right ++ s); };
+      filter = v: ((!builtins.hasAttr v modules) || (builtins.getAttr v modules == true));
     in
-    lib.lists.foldl f config modules;
-
+    lib.lists.filter filter arr;
   makeConf =
     c:
     let
-      wlogout = if (config.modules.wlogout.enable == true) then [ "custom/power" ] else [ ];
-      bluetooth = if (systemConfig.systemModule.bluetooth.enable == true) then [ "bluetooth" ] else [ ];
+      right = {
+        "custom/power" = config.modules.wlogout.enable;
+        "custom/lock" = config.modules.hyprlock.enable;
+        "bluetooth" = systemConfig.systemModule.bluetooth.enable;
+      };
     in
-    merge conf [
-      wlogout
-      bluetooth
-    ];
+    c
+    // {
+      "modules-right" = (deleteValue c.modules-right right);
+    };
   finalConf = makeConf conf;
 
 in
@@ -167,8 +207,6 @@ in
 
     home.file.".config/waybar/style.css".source = ./style.css;
 
-    
-
     home.file.".config/waybar/config" = {
       source = jsonFormat.generate "waybar-config" (finalConf);
       onChange = ''
@@ -178,7 +216,7 @@ in
     };
     home.packages = with pkgs; [
       nerd-fonts.fantasque-sans-mono
-      playerctl
+      # playerctl
       waybar
     ];
 

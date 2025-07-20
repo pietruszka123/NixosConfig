@@ -26,5 +26,7 @@
     ./wallpaper
     ./browsers
     ./file-managers
+    ./hyprlock.nix
+    ./nixcord.nix
   ];
 }

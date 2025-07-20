@@ -34,24 +34,11 @@ in
     ./hardware-configuration.nix
   ];
 
-  # #FIXME electron build error fix
-  # nixpkgs.overlays = [
-  #   (self: super: {
-  #     electron_31 = self.electron;
-  #   })
-  # ];
-
   # Use the systemd-boot EFI boot loader.
   boot = {
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
-      #   minegrub-theme = {
-      #     enable = true;
-      #     splash = "100% Flakes!";
-      #     background = "background_options/1.8  - [Classic Minecraft].png";
-      #     boot-options-count = 4;
-      #   };
     };
     supportedFilesystems = [ "ntfs" ];
   };
@@ -61,26 +48,19 @@ in
 
   nixpkgs.config.allowUnfree = true;
 
-  #  xdg.portal.enable = true;
-  #  xdg.portal.extraPortals = [
-  #    pkgs.xdg-desktop-portal-gtk
-  #    pkgs.xdg-desktop-portal-hyprland
-  #  ];
-
-  # System
-  # system = {inherit systemModule;};
-
   systemModule = systemModule;
 
   modules = {
     podman.enable = true;
     steam.enable = true;
     ssh.enable = true;
-    transmission.enable = true;
+    transmission.enable = false;
     flatpak.enable = true;
     #alvr.enable = true;
     kdeconnect.enable = true;
 
+    waydroid.enable = false;
+    virt-manager.enable = true;
   };
 
   programs = {
@@ -92,30 +72,25 @@ in
     };
   };
   fileSystems."/mnt/windows-linux-coalition" = {
-    device = "/dev/nvme0n1p6";
+    device = "/dev/nvme0n1p7";
     fsType = "ntfs-3g";
     options = [
       "rw"
       "uid=1000"
     ]; # ! uid of user
   };
-  # fileSystems."/mnt/d" = {
-  #   device = "/dev/sdc3";
-  #   fsType = "ntfs-3g";
-  #   options = [
-  #     "rw"
-  #     "uid=1000"
-  #   ]; # ! uid of user
-  # };
-  #  userConfig.system.lemurs.enable = true;
 
   services.xserver.enable = true;
   services.xserver.displayManager.startx.enable = true;
+  services.gvfs.enable = true;
 
   networking.hostName = "Pc"; # Define your hostname.
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
+    sharedModules = [
+      inputs.nixcord.homeModules.nixcord
+    ];
     extraSpecialArgs = {
       inherit inputs;
       inherit stable-pkgs;
@@ -141,8 +116,6 @@ in
     hardwareClockInLocalTime = true;
   };
 
-  nix.optimise.automatic = true;
-
   # Select internationalisation properties.
   # i18n.defaultLocale = "en_US.UTF-8";
   # console = {
@@ -151,11 +124,15 @@ in
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
 
-  #Flakes
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  nix = {
+    optimise.automatic = true;
+
+    # Flakes
+    settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+  };
 
   users.users.user = {
     isNormalUser = true;
@@ -174,17 +151,13 @@ in
 
       hyfetch
 
-      xwaylandvideobridge # Utility to allow streaming Wayland windows to X applications
-      waybar
+      kdePackages.xwaylandvideobridge # Utility to allow streaming Wayland windows to X applications
       eww
 
       neovim
-      #firefox
       tree
 
-      dolphin
-
-      heroic # TODO: move to home manager config
+      # kdePackages.dolphin
 
     ];
   };
@@ -192,22 +165,20 @@ in
   programs.git = {
     enable = true;
     lfs.enable = true;
-
   };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
     #brightnessctl # backlight controls
     lshw # a small tool to extract detailed information on the hardware configuration of the machine
-    #gcc
-    git
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    vim
     wget
     parted
 
-    btop
+    (btop.override {
+      cudaSupport = true;
+    })
     # lemurs
+    btrfs-progs
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -217,17 +188,6 @@ in
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  #system.copySystemConfiguration = true;
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.

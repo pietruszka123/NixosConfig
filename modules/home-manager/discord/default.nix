@@ -27,9 +27,9 @@ in
 
       })
 
-      (discord.override {
-        withVencord = true;
-      })
+      # (discord.override {
+      #   # withVencord = true;
+      # })
       vesktop
       #betterdiscordctl
 

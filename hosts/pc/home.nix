@@ -8,13 +8,14 @@
 {
   imports = [
     ../../modules/home-manager
-    inputs.catppuccin.homeManagerModules.catppuccin
+    inputs.catppuccin.homeModules.catppuccin
   ];
   modules = {
     hyprland = {
       enable = true;
       additional_config = ./hyprland.conf;
     };
+    hyprlock.enable = true;
     wallpaper = {
       enable = true;
 
@@ -47,7 +48,7 @@
         enable = true;
         default_editor = true;
       };
-      android-studio.enable = true;
+      android-studio.enable = false;
     };
     waybar.enable = true;
 
@@ -68,7 +69,7 @@
     game_launchers = {
       r2modman.enable = true;
       ryujinx.enable = true;
-
+      heroic.enable = true;
     };
     wlogout.enable = true;
     wine.enable = true;
@@ -84,6 +85,7 @@
     file-managers = {
       nautilus.enable = true;
     };
+    nixcord.enable = true;
   };
 
   #programs.atuin = {
@@ -114,15 +116,25 @@
     unar
     linux-wifi-hotspot
     mate.engrampa
+    p7zip
 
     nerd-fonts.fira-code
+    glasstty-ttf
 
     (callPackage ../../packages/wayland-push-to-talk.nix { })
 
     # alvr
 
     mangohud
+
   ];
+  home.pointerCursor = {
+
+    size = 21;
+  };
+
+  services.gnome-keyring.enable = true;
+
   catppuccin = {
     flavor = "mocha";
     accent = "lavender";

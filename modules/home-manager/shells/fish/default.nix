@@ -25,6 +25,7 @@ in
         (lib.mkIf (config.modules.editors.neovim.enable == true) {
           "v" = "nvim";
         })
+        # { "rm" = "rm -i"; }
       ];
       #   plugins = [
 

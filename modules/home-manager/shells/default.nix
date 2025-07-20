@@ -15,6 +15,10 @@ in
     modules.shells.plugins.tlrc.enable = lib.mkEnableOption "Enable tlrc";
     modules.shells.plugins.eza.enable = lib.mkEnableOption "Enable eza";
     modules.shells.plugins.starship.enable = lib.mkEnableOption "Enable starship";
+    modules.shells.plugins.nix-index.enable = lib.mkEnableOption {
+      description = "Enable nix-index";
+      default = true;
+    };
   };
 
   imports = [
@@ -25,6 +29,12 @@ in
     home.packages = lib.mkMerge [
       (lib.mkIf (shellPlugins.tlrc.enable == true) [ pkgs.tlrc ])
     ];
+
+    programs.nix-index = {
+      enable = true;
+      enableFishIntegration = true;
+      enableBashIntegration = true;
+    };
 
     programs.eza = {
       enable = shellPlugins.eza.enable;
