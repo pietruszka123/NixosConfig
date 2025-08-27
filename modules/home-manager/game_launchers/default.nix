@@ -7,6 +7,7 @@
 {
   imports = [
 
+    ./osu.nix
     ./r2modman.nix
   ];
   options = {
@@ -21,13 +22,11 @@
           pkgs.ryujinx
         ];
       })
-      (lib.mkIf config.modules.game_launchers.heroic.enable
-        {
-          packages = [
-            pkgs.heroic
-          ];
-        }
-      )
+      (lib.mkIf config.modules.game_launchers.heroic.enable {
+        packages = [
+          pkgs.heroic
+        ];
+      })
     ];
   };
 }

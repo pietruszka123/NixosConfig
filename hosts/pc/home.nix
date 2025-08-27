@@ -70,6 +70,7 @@
       r2modman.enable = true;
       ryujinx.enable = true;
       heroic.enable = true;
+      osu.enable = true;
     };
     wlogout.enable = true;
     wine.enable = true;
