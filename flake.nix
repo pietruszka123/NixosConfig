@@ -15,14 +15,25 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    catppuccin.url = "github:catppuccin/nix";
+    catppuccin = {
+      url = "github:catppuccin/nix";
+      inputs.nixpkgs.follows = "nixpkgs";
 
-    hyprland.url = "github:hyprwm/Hyprland";
+    };
 
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nixcord = {
       url = "github:kaylorben/nixcord";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -42,39 +53,26 @@
       stable-pkgs = nixpkgs-stable.legacyPackages.${system};
       hyprland-source = hyprland.packages.${system};
       zen-browser-source = zen-browser.packages.${system};
-
     in
     {
-      nixosConfigurations = {
-        laptop = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-            inherit stable-pkgs;
-            inherit hyprland-source;
-            inherit zen-browser-source;
-          };
-          modules = [ ./hosts/laptop ];
-        };
-        laptop2 = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-            inherit stable-pkgs;
-            inherit hyprland-source;
-            inherit zen-browser-source;
-          };
-          modules = [ ./hosts/laptop2 ];
-        };
+      nixosConfigurations =
+        let
+          system = systemName: {
+            ${systemName} = nixpkgs.lib.nixosSystem {
 
-        pc = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-            inherit stable-pkgs;
-            inherit hyprland-source;
-            inherit zen-browser-source;
+              specialArgs = {
+	      	inherit systemName;
+                inherit inputs;
+                inherit stable-pkgs;
+                inherit hyprland-source;
+                inherit zen-browser-source;
+              };
+              modules = [ ./hosts/${systemName} ];
+
+            };
           };
-          modules = [ ./hosts/pc ];
-        };
-      };
+        in
+        (system "pc") // (system "laptop2");
 
       devShells.${system}.default = pkgs.mkShell {
         nativeBuildInputs = with pkgs; [

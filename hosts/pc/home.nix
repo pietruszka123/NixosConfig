@@ -51,6 +51,7 @@
       android-studio.enable = false;
     };
     waybar.enable = true;
+    quickshell.enable = true;
 
     atuin.enable = true;
     terminals = {
@@ -87,6 +88,8 @@
       nautilus.enable = true;
     };
     nixcord.enable = true;
+    mpd.enable = true;
+    syncthing.enable = true;
   };
 
   #programs.atuin = {

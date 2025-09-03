@@ -28,5 +28,8 @@
     ./file-managers
     ./hyprlock.nix
     ./nixcord.nix
+    ./mpd
+    ./quickshell
+    ./syncthing.nix
   ];
 }

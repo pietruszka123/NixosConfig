@@ -14,8 +14,8 @@ in
   };
   config = lib.mkIf cfg.enable {
 
-home.packages = with pkgs; [
-     osu-lazer-bin 
+    home.packages = with pkgs; [
+      osu-lazer-bin
     ];
   };
 

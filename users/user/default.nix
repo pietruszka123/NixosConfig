@@ -1,0 +1,11 @@
+{
+  config,
+  pkgs,
+  inputs,
+  stable-pkgs,
+  hyprland-source,
+  zen-browser-source,
+  systemModule,
+  systemName,
+  ...
+}:

@@ -6,8 +6,9 @@
   stable-pkgs,
   hyprland-source,
   zen-browser-source,
+  systemName,
   ...
-}:
+}@args:
 let
 
   systemModule = {
@@ -29,7 +30,7 @@ in
 {
 
   imports = [
-    inputs.home-manager.nixosModules.default
+    (import ../../base.nix (args // { inherit systemModule; }))
     ../../modules/nixos/default.nix
     ./hardware-configuration.nix
   ];
@@ -72,7 +73,7 @@ in
     };
   };
   fileSystems."/mnt/windows-linux-coalition" = {
-    device = "/dev/nvme0n1p7";
+    device = "/dev/disk/by-uuid/2CFAA70BFAA6CFFE";
     fsType = "ntfs-3g";
     options = [
       "rw"
@@ -84,32 +85,7 @@ in
   services.xserver.displayManager.startx.enable = true;
   services.gvfs.enable = true;
 
-  networking.hostName = "Pc"; # Define your hostname.
-  home-manager = {
-    useUserPackages = true;
-    useGlobalPkgs = true;
-    sharedModules = [
-      inputs.nixcord.homeModules.nixcord
-    ];
-    extraSpecialArgs = {
-      inherit inputs;
-      inherit stable-pkgs;
-      inherit hyprland-source;
-      inherit zen-browser-source;
-
-      systemConfig = {
-        inherit systemModule;
-      };
-      userConfig = {
-        system = {
-          specialization = "default";
-        };
-      };
-    };
-    users = {
-      "user" = import ./home.nix;
-    };
-  };
+  networking.hostName = "Nixu_machine_UwU"; # Define your hostname.
 
   time = {
     timeZone = "Europe/Warsaw";
@@ -158,7 +134,6 @@ in
       tree
 
       # kdePackages.dolphin
-
     ];
   };
 
