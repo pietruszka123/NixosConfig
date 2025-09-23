@@ -7,16 +7,35 @@
   zen-browser-source,
   systemModule,
   systemName,
+  neovim-nightly-overlay-source,
+  vicinae-source,
+  lib,
   ...
 }@args:
 let
 
-  # users =
-  #   let
-  #     dirs = p: buildins.readDir p;
-  #     f = builtins.listToAttrs ( map ( { x, y } @ value: { name = x; inherit value; } ) [...] )
-  #   in
-  #   dirs ./hosts;
+  users =
+    let
+      dirs = p: builtins.readDir p;
+
+      f =
+        p:
+        lib.lists.foldr (
+          a: b:
+          (
+            {
+              "${a}" = {
+                _module.args.userName = "user";
+                # _module.args.systemBaseVersion = "24.05";
+                imports = [ ./base-user.nix ];
+              };
+
+            }
+            // b
+          )
+        ) ({ }) (builtins.attrNames (dirs p));
+    in
+    f ./users;
 
 in
 {
@@ -30,13 +49,15 @@ in
       useGlobalPkgs = true;
       sharedModules = [
         inputs.nixcord.homeModules.nixcord
+        inputs.vicinae.homeManagerModules.default
       ];
       extraSpecialArgs = {
         inherit inputs;
         inherit stable-pkgs;
         inherit hyprland-source;
         inherit zen-browser-source;
-        userName = "test";
+        inherit neovim-nightly-overlay-source;
+        inherit vicinae-source;
 
         systemConfig = {
           inherit systemModule;

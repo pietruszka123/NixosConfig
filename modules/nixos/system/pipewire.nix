@@ -14,7 +14,7 @@
     security.rtkit.enable = true;
 
     environment.systemPackages = with pkgs; [
-      pulseaudio
+      # pulseaudio
 
       faudio
     ];
@@ -25,6 +25,21 @@
       alsa.support32Bit = true;
       pulse.enable = true;
 
+      # extraConfig.pipewire-pulse."92-low-latency" = {
+      #   "context.properties" = [
+      #     {
+      #       name = "libpipewire-module-protocol-pulse";
+      #       args = { };
+      #     }
+      #   ];
+      #   "pulse.properties" = {
+      #     "pulse.min.req" = "1024/48000";
+      #     "pulse.max.req" = "1024/48000";
+      #     "pulse.min.quantum" = "1024/48000";
+      #   };
+      #
+      # };
+
       extraConfig.pipewire-pulse."92-low-latency" = {
         "context.properties" = [
           {
@@ -33,11 +48,16 @@
           }
         ];
         "pulse.properties" = {
-          "pulse.min.req" = "1024/48000";
-          "pulse.max.req" = "1024/48000";
-          "pulse.min.quantum" = "1024/48000";
+          "pulse.min.req" = "32/48000";
+          "pulse.default.req" = "32/48000";
+          "pulse.max.req" = "32/48000";
+          "pulse.min.quantum" = "32/48000";
+          "pulse.max.quantum" = "32/48000";
         };
-
+        "stream.properties" = {
+          "node.latency" = "32/48000";
+          "resample.quality" = 1;
+        };
       };
 
       wireplumber.enable = true;

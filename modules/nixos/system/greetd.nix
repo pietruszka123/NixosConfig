@@ -11,10 +11,10 @@
   config = lib.mkIf config.systemModule.greetd.enable {
     services.greetd = {
       enable = true;
-      vt = 2;
+      # vt = 2;
       settings = {
         default_session = {
-          command = ''${pkgs.greetd.tuigreet}/bin/tuigreet --time --greeting "Gami to furras" --cmd Hyprland'';
+          command = ''${pkgs.tuigreet}/bin/tuigreet --time --greeting "Gami to furras" --cmd Hyprland'';
         };
       };
     };

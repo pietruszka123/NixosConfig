@@ -2,11 +2,13 @@
   config,
   lib,
   pkgs,
+  neovim-nightly-overlay-source,
   ...
 }:
 
 let
   cfg = config.modules.editors.neovim;
+
 in
 {
   options = {
@@ -22,6 +24,7 @@ in
       enable = true;
       defaultEditor = true;
       withPython3 = true;
+      package =  neovim-nightly-overlay-source.default;
     };
 
     # environment.variables =

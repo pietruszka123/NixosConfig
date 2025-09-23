@@ -16,6 +16,11 @@ in
     programs.nixcord = {
       enable = true;
       config = {
+        autoUpdate = true;
+
+        enabledThemes = [
+          "https://luckfire.github.io/amoled-cord/src/amoled-cord.css"
+        ];
         themeLinks = [
           "https://luckfire.github.io/amoled-cord/src/amoled-cord.css"
         ];

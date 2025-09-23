@@ -7,6 +7,8 @@
   hyprland-source,
   zen-browser-source,
   systemName,
+  # caelestia-shell-source,
+  # caelestia-cli-source,
   ...
 }@args:
 let
@@ -25,6 +27,7 @@ let
     bluetooth.enable = true;
     openvpn.enable = true;
     opentabletdriver.enable = true;
+    ratbag.enable = false;
   };
 in
 {
@@ -57,11 +60,17 @@ in
     ssh.enable = true;
     transmission.enable = false;
     flatpak.enable = true;
-    #alvr.enable = true;
+    alvr.enable = true;
     kdeconnect.enable = true;
 
     waydroid.enable = false;
     virt-manager.enable = true;
+    vr = {
+      envision.enable = false;
+      wivrn.enable = true;
+	  monado.enable = true;
+      wlx-overlay.enable = true;
+    };
   };
 
   programs = {
@@ -79,6 +88,14 @@ in
       "rw"
       "uid=1000"
     ]; # ! uid of user
+  };
+  fileSystems."/mnt/test" = {
+    device = "dev/disk/by-uuid/8d177aa1-7179-4ff6-abd9-0f0a97016190";
+    fsType = "btrfs";
+    options = [
+      "compress=zstd"
+      "noatime"
+    ];
   };
 
   services.xserver.enable = true;
@@ -130,8 +147,11 @@ in
       kdePackages.xwaylandvideobridge # Utility to allow streaming Wayland windows to X applications
       eww
 
-      neovim
+      # neovim
       tree
+
+      # caelestia-shell-source.with-cli
+      # caelestia-cli-source.with-shell
 
       # kdePackages.dolphin
     ];

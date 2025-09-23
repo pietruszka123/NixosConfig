@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixpkgs-24.11-darwin";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
 
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
@@ -35,6 +35,22 @@
       url = "github:kaylorben/nixcord";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # caelestia-shell = {
+    #   url = "github:caelestia-dots/shell";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+    # caelestia-cli = {
+    #   url = "github:caelestia-dots/cli";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    #
+    # };
+
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+
+    vicinae = {
+      url = "github:vicinaehq/vicinae";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -45,6 +61,10 @@
       catppuccin,
       hyprland,
       zen-browser,
+      neovim-nightly-overlay,
+      # caelestia-shell,
+      # caelestia-cli,
+      vicinae,
       ...
     }@inputs:
     let
@@ -53,6 +73,10 @@
       stable-pkgs = nixpkgs-stable.legacyPackages.${system};
       hyprland-source = hyprland.packages.${system};
       zen-browser-source = zen-browser.packages.${system};
+      neovim-nightly-overlay-source = inputs.neovim-nightly-overlay.packages.${system};
+	  vicinae-source = inputs.vicinae.packages.${system};
+      # caelestia-shell-source = caelestia-shell.packages.${system};
+      # caelestia-cli-source = caelestia-cli.packages.${system};
     in
     {
       nixosConfigurations =
@@ -61,11 +85,15 @@
             ${systemName} = nixpkgs.lib.nixosSystem {
 
               specialArgs = {
-	      	inherit systemName;
+                inherit systemName;
                 inherit inputs;
                 inherit stable-pkgs;
                 inherit hyprland-source;
                 inherit zen-browser-source;
+                inherit neovim-nightly-overlay-source;
+				inherit vicinae-source;
+                # inherit caelestia-shell-source;
+                # inherit caelestia-cli-source;
               };
               modules = [ ./hosts/${systemName} ];
 

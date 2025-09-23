@@ -31,5 +31,7 @@
     ./mpd
     ./quickshell
     ./syncthing.nix
+    ./feishin.nix
+	./vicinae.nix
   ];
 }

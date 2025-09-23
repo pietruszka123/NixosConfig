@@ -5,5 +5,6 @@
     ./steam.nix
     ./alvr.nix
     ./kdeconnect.nix
+	./vr
   ];
 }

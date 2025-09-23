@@ -18,7 +18,6 @@
     hyprlock.enable = true;
     wallpaper = {
       enable = true;
-
       hyprpaper.enable = true;
     };
 
@@ -40,7 +39,7 @@
 
     firefox.enable = true;
 
-    tofi.enable = true;
+    tofi.enable = false;
 
     editors = {
       vscode.enable = true;
@@ -48,7 +47,7 @@
         enable = true;
         default_editor = true;
       };
-      android-studio.enable = false;
+      # android-studio.enable = false;
     };
     waybar.enable = true;
     quickshell.enable = true;
@@ -56,7 +55,7 @@
     atuin.enable = true;
     terminals = {
       alacritty.enable = true;
-      wezterm.enable = true;
+      wezterm.enable = false;
       kitty.enable = true;
     };
     discord.enable = true;
@@ -69,27 +68,29 @@
     obsidian.enable = true;
     game_launchers = {
       r2modman.enable = true;
-      ryujinx.enable = true;
+      ryujinx.enable = false;
       heroic.enable = true;
-      osu.enable = true;
+      osu.enable = false;
     };
     wlogout.enable = true;
-    wine.enable = true;
+    wine.enable = false;
 
     qbittorrent.enable = true;
     bottles.enable = true;
 
     browsers = {
       floorp.enable = false;
-      zen.enable = true;
+      zen.enable = false;
     };
 
     file-managers = {
       nautilus.enable = true;
     };
     nixcord.enable = true;
-    mpd.enable = true;
+    mpd.enable = false;
     syncthing.enable = true;
+    feishin.enable = true;
+    vicinae.enable = true;
   };
 
   #programs.atuin = {
@@ -111,14 +112,12 @@
     zip
 
     nwg-look
-    go
     pulsemixer
 
     tmux
 
-    eza
     unar
-    linux-wifi-hotspot
+    # linux-wifi-hotspot
     mate.engrampa
     p7zip
 
@@ -131,23 +130,23 @@
 
     mangohud
 
+    kdePackages.breeze-gtk
+    kdePackages.breeze-icons
+    adwaita-icon-theme
+
   ];
   home.pointerCursor = {
-
     size = 21;
   };
 
-  services.gnome-keyring.enable = true;
+  programs.git-credential-oauth.enable = true;
 
   catppuccin = {
     flavor = "mocha";
     accent = "lavender";
     cursors.enable = true;
     kvantum.enable = true;
-    gtk.enable = true;
   };
-  #gtk.catppuccin.enable = true;
-  #qt.style.catppuccin.enable = true;
 
   home.sessionVariables = {
     EDITOR = "nvim";

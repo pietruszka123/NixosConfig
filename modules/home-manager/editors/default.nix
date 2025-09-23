@@ -3,7 +3,7 @@
   imports = [
     ./vscode
     ./neovim
-    ./android-studio.nix
+    # ./android-studio.nix
   ];
 
 }

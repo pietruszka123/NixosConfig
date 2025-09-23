@@ -19,7 +19,7 @@
     home = lib.mkMerge [
       (lib.mkIf config.modules.game_launchers.ryujinx.enable {
         packages = [
-          pkgs.ryujinx
+          pkgs.ryubing
         ];
       })
       (lib.mkIf config.modules.game_launchers.heroic.enable {

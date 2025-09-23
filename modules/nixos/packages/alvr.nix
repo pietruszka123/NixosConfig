@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  stable-pkgs,
   ...
 }:
 
@@ -14,21 +15,27 @@ in
   };
   config = lib.mkIf cfg.enable {
 
-    environment.systemPackages = with pkgs; [
-      alvr
-    ];
+    # programs.alvr = {
+    #   enable = true;
+    #   openFirewall = true;
+    #
+    # };
+        environment.systemPackages = with pkgs; [
+    stable-pkgs.alvr
+        ];
 
-    networking.firewall = {
-      enable = true;
-      allowedTCPPorts = [
-        9943
-        9944
+        networking.firewall = {
+          enable = true;
+          allowedTCPPorts = [
+            9943
+            9944
 
-      ];
-      allowedUDPPortRanges = [
-
-      ];
-    };
+          ];
+          allowedUDPPorts = [
+            9943
+            9944
+          ];
+        };
 
   };
 

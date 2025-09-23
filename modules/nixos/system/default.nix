@@ -10,6 +10,7 @@
     ./bluetooth.nix
     ./openvpn.nix
     ./opentabletdriver.nix
+    ./ratbag.nix
   ];
 
 }
