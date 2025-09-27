@@ -18,6 +18,10 @@ in
       (lib.mkIf (cfg.nautilus.enable == true) [
         pkgs.nautilus
       ])
+      # (lib.mkIf (cfg.nautilus.enable == true && config.modules.terminals.alacritty.enable == true) [
+      #   pkgs.nautilus-open-any-terminal
+      #   pkgs.nautilus-python
+      # ])
 
     ];
 

@@ -68,7 +68,7 @@ in
     vr = {
       envision.enable = false;
       wivrn.enable = true;
-	  monado.enable = true;
+      monado.enable = true;
       wlx-overlay.enable = true;
     };
   };
@@ -80,6 +80,11 @@ in
       # package = inputs.nixpkgs-stable.legacyPackages.x86_64-linux.hyprland;
       xwayland.enable = true;
     };
+    nautilus-open-any-terminal = {
+      enable = true;
+      terminal = "alacritty";
+    };
+
   };
   fileSystems."/mnt/windows-linux-coalition" = {
     device = "/dev/disk/by-uuid/2CFAA70BFAA6CFFE";

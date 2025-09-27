@@ -17,7 +17,6 @@ in
 {
   imports = [
     ./modules/home-manager
-    inputs.catppuccin.homeModules.catppuccin
     ./users/${userName}
   ];
   config = {

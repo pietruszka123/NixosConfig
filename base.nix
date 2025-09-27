@@ -7,6 +7,7 @@
   zen-browser-source,
   systemModule,
   systemName,
+
   neovim-nightly-overlay-source,
   vicinae-source,
   lib,
@@ -25,9 +26,17 @@ let
           (
             {
               "${a}" = {
-                _module.args.userName = "user";
+                # _module.args.userName = "user";
                 # _module.args.systemBaseVersion = "24.05";
-                imports = [ ./base-user.nix ];
+                imports = [
+                  (import ./base-user.nix (
+                    args
+                    // {
+                      userName = builtins.trace "${a}" a;
+                      systemBaseVersion = config.system.stateVersion;
+                    }
+                  ))
+                ];
               };
 
             }
@@ -50,6 +59,7 @@ in
       sharedModules = [
         inputs.nixcord.homeModules.nixcord
         inputs.vicinae.homeManagerModules.default
+        inputs.catppuccin.homeModules.catppuccin
       ];
       extraSpecialArgs = {
         inherit inputs;
@@ -68,13 +78,13 @@ in
           };
         };
       };
-      users =
-        let
-          user = userName: {
-            ${userName} = import ./hosts/${systemName}/home.nix;
-          };
-        in
-        (user "user");
+      users = users;
+      # let
+      #   user = userName: {
+      #     ${userName} = import ./hosts/${systemName}/home.nix;
+      #   };
+      # in
+      # (user "user");
     };
   };
 
