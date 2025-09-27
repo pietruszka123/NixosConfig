@@ -3,83 +3,100 @@
   inputs,
   lib,
   pkgs,
+  stable-pkgs,
+  hyprland-source,
+  zen-browser-source,
+  systemName,
+  # caelestia-shell-source,
+  # caelestia-cli-source,
   ...
-}:
+}@args:
+let
 
+  systemModule = {
+    powerManagement.enable = true;
+    networking.enable = true;
+    nvidia = {
+      enable = true;
+      nvidiaBusId = "PCI:1:00:0";
+      intelBusId = "PCI:0:2:0";
+    };
+    pipewire.enable = true;
+    #lemurs.enable = true;
+    greetd.enable = true;
+    bluetooth.enable = true;
+    openvpn.enable = true;
+    opentabletdriver.enable = false;
+    ratbag.enable = false;
+  };
+in
 {
+
   imports = [
-    # Include the results of the hardware scan.
-    inputs.home-manager.nixosModules.default
-    ../../modules/system/default.nix
+    (import ../../base.nix (args // { inherit systemModule; }))
+    ../../modules/nixos/default.nix
     ./hardware-configuration.nix
   ];
+
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+    supportedFilesystems = [ "ntfs" ];
+  };
+
+  #TODO: make it work from home manager
+  environment.variables.EDITOR = "nvim";
 
   nixpkgs.config.allowUnfree = true;
 
-  # System
-  system = {
-    powerManagement.enable = true;
-    networking.enable = true;
-    nvidia.enable = true;
-    pipewire.enable = true;
-    #lemurs.enable = true;
+  systemModule = systemModule;
+
+  modules = {
+    podman.enable = true;
+    steam.enable = true;
+    ssh.enable = true;
+    transmission.enable = false;
+    flatpak.enable = true;
+    alvr.enable = true;
+    kdeconnect.enable = true;
+
+    waydroid.enable = false;
+    virt-manager.enable = true;
+    vr = {
+      envision.enable = false;
+      wivrn.enable = true;
+      monado.enable = true;
+      wlx-overlay.enable = true;
+    };
   };
 
-  system.greetd.enable = true;
-  #  userConfig.system.lemurs.enable = true;
+  programs = {
+    fish.enable = true;
+    hyprland = {
+      enable = true;
+      # package = inputs.nixpkgs-stable.legacyPackages.x86_64-linux.hyprland;
+      xwayland.enable = true;
+    };
+    nautilus-open-any-terminal = {
+      enable = true;
+      terminal = "alacritty";
+    };
+
+  };
 
   services.xserver.enable = true;
   services.xserver.displayManager.startx.enable = true;
-  programs.hyprland.enable = true;
-  specialisation = {
-    on-the-go.configuration = {
-      system.nixos.tags = [ "on-the-go" ];
-      system.nvidia.nvidia_prime = lib.mkForce "offload";
-      home-manager.extraSpecialArgs = lib.mkForce {
-        inherit inputs;
-        userConfig = {
-          system = {
-            specialization = "on-the-go";
-          };
-        };
-      };
+  services.gvfs.enable = true;
 
-      #hardware.nvidia = {
-      #  prime.offload.enable = lib.mkForce true;
-      #  prime.offload.enableOffloadCmd = lib.mkForce true;
-      #  prime.sync.enable = lib.mkForce false;
-      #};
-    };
+  networking.hostName = "Laptopik_UwU"; # Define your hostname.
+
+  time = {
+    timeZone = "Europe/Warsaw";
+    hardwareClockInLocalTime = true;
   };
-  home-manager = {
-    useUserPackages = true;
-    useGlobalPkgs = true;
-    extraSpecialArgs = {
-      inherit inputs;
-      userConfig = {
-        system = {
-          specialization = "default";
-        };
-      };
-    };
-    users = {
-      "user" = import ./home.nix;
-    };
-  };
-
-  # TODO: look at it
-  # networking.hostName = "nixos"; # Define your hostname.
-  # Pick only one of the below networking options.
-  # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-
-  # Set your time zone.
-  time.timeZone = "Europe/Warsaw";
-
-  # Storage Optimization
-  nix.optimise.automatic = true;
 
   # Select internationalisation properties.
   # i18n.defaultLocale = "en_US.UTF-8";
@@ -89,24 +106,16 @@
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
 
-  #Flakes
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  nix = {
+    optimise.automatic = true;
 
-  boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
+    # Flakes
+    settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+  };
 
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  programs.fish.enable = true;
-  # zsh
-  #programs.zsh.enable = true;
-  #services.displayManager.enable = true;
-  #services.displayManager.execCmd = "${pkgs.lemurs}/bin/lemurs";
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.user = {
     isNormalUser = true;
     extraGroups = [
@@ -114,41 +123,46 @@
       "input"
       "networkmanager"
       "seat"
-    ]; # Enable ‘sudo’ for the user.
+    ];
     shell = pkgs.fish;
+    useDefaultShell = true;
     packages = with pkgs; [
-      # nix neovim language
-      nil # lsp
-      nixfmt # formatter
-
-      tofi # Tiny dynamic menu for Wayland
+      nixfmt-rfc-style # formatter
 
       pavucontrol
 
       hyfetch
 
-      xwaylandvideobridge # Utility to allow streaming Wayland windows to X applications
-      waybar # TODO: replace with eww
+      kdePackages.xwaylandvideobridge # Utility to allow streaming Wayland windows to X applications
       eww
 
-      neovim
-      firefox
+      # neovim
       tree
+
+      # caelestia-shell-source.with-cli
+      # caelestia-cli-source.with-shell
+
+      # kdePackages.dolphin
     ];
   };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  programs.git = {
+    enable = true;
+    lfs.enable = true;
+  };
+
   environment.systemPackages = with pkgs; [
-    brightnessctl # backlight controls
+    #brightnessctl # backlight controls
     lshw # a small tool to extract detailed information on the hardware configuration of the machine
-    #gcc
-    git
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    vim
     wget
     parted
 
+    (btop.override {
+      cudaSupport = true;
+    })
     # lemurs
+    btrfs-progs
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -158,22 +172,6 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  #system.copySystemConfiguration = true;
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
@@ -191,6 +189,6 @@
   # and migrated your data accordingly.
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "23.11"; # Did you read the comment?
 
+  system.stateVersion = "25.05"; # Did you read the comment?
 }

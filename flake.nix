@@ -100,7 +100,7 @@
             };
           };
         in
-        (system "pc") // (system "laptop2");
+        (system "pc") // (system "laptop2") // (system "laptop");
 
       devShells.${system}.default = pkgs.mkShell {
         nativeBuildInputs = with pkgs; [
