@@ -104,11 +104,8 @@ in
       inherit inputs;
       inherit stable-pkgs;
       systemConfig = {
-
         inherit systemModule;
-
       };
-
       userConfig = {
         system = {
           specialization = "default";
