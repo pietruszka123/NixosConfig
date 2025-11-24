@@ -7,7 +7,7 @@
 
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
 
     home-manager = {
@@ -51,6 +51,8 @@
       url = "github:vicinaehq/vicinae";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    minegrub-world-sel-theme.url = "github:Lxtharia/minegrub-world-sel-theme";
   };
 
   outputs =
@@ -74,7 +76,8 @@
       hyprland-source = hyprland.packages.${system};
       zen-browser-source = zen-browser.packages.${system};
       neovim-nightly-overlay-source = inputs.neovim-nightly-overlay.packages.${system};
-	  vicinae-source = inputs.vicinae.packages.${system};
+      vicinae-source = inputs.vicinae.packages.${system};
+
       # caelestia-shell-source = caelestia-shell.packages.${system};
       # caelestia-cli-source = caelestia-cli.packages.${system};
     in
@@ -91,11 +94,14 @@
                 inherit hyprland-source;
                 inherit zen-browser-source;
                 inherit neovim-nightly-overlay-source;
-				inherit vicinae-source;
+                inherit vicinae-source;
                 # inherit caelestia-shell-source;
                 # inherit caelestia-cli-source;
               };
-              modules = [ ./hosts/${systemName} ];
+              modules = [
+                ./hosts/${systemName}
+                inputs.minegrub-world-sel-theme.nixosModules.default
+              ];
 
             };
           };

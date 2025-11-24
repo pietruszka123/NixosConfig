@@ -9,6 +9,7 @@
 
     ./osu.nix
     ./r2modman.nix
+    ./vintage-story.nix
   ];
   options = {
     modules.game_launchers.ryujinx.enable = lib.mkEnableOption "enable wezterm module";

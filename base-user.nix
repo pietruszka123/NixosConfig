@@ -2,6 +2,7 @@
   config,
   pkgs,
   inputs,
+  lib,
   stable-pkgs,
   hyprland-source,
   zen-browser-source,
@@ -18,7 +19,8 @@ in
   imports = [
     ./modules/home-manager
     ./users/${userName}
-  ];
+  ]
+  ++ lib.optional (builtins.pathExists ./hosts/${systemName}/home.nix) ./hosts/${systemName}/home.nix;
   config = {
     home.username = userName;
     home.homeDirectory = "/home/${userName}";

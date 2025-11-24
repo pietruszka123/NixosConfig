@@ -9,6 +9,8 @@
     ./flatpak.nix
     ./waydroid.nix
     ./virt-manager.nix
+	./gnome-keyring.nix
+	./ghidra.nix
   ];
 
 }

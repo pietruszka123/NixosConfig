@@ -24,7 +24,7 @@ in
       enable = true;
       defaultEditor = true;
       withPython3 = true;
-      package =  neovim-nightly-overlay-source.default;
+      package = neovim-nightly-overlay-source.default;
     };
 
     # environment.variables =
@@ -45,7 +45,7 @@ in
 
       lua-language-server
       ripgrep
-      taplo-lsp
+      taplo
     ];
 
   };

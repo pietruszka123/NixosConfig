@@ -13,7 +13,7 @@ in
     modules.ssh.enable = lib.mkEnableOption "enable ssh module";
   };
   config = lib.mkIf cfg.enable {
-
+    programs.ssh.startAgent = true;
     services.openssh = {
       enable = true;
       ports = [ 2137 ];
