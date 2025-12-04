@@ -133,7 +133,6 @@ in
 
       hyfetch
 
-      kdePackages.xwaylandvideobridge # Utility to allow streaming Wayland windows to X applications
       eww
 
       # neovim

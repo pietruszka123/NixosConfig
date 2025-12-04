@@ -28,6 +28,7 @@ in
           isDefault = true;
           settings = {
             "extensions.autoDisableScopes" = 0;
+			"middlemouse.paste" = false;
           };
 
 

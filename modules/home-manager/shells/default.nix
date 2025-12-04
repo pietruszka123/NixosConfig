@@ -48,6 +48,7 @@ in
       enableFishIntegration = true;
       enableBashIntegration = true;
     };
+	home.file.".config/starship.toml".source = lib.mkIf (shellPlugins.starship.enable == true) ./starship.toml;
   };
 
 }

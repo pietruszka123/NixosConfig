@@ -2,19 +2,18 @@
   config,
   pkgs,
   inputs,
-  stable-pkgs,
-  hyprland-source,
-  zen-browser-source,
-  systemModule,
-  systemName,
   ...
 }:
-{
 
+{
+  imports = [
+    ../../modules/home-manager
+    inputs.catppuccin.homeModules.catppuccin
+  ];
   modules = {
     hyprland = {
       enable = true;
-      # additional_config = ./hyprland.conf;
+      additional_config = ./hyprland.conf;
     };
     hyprlock.enable = true;
     wallpaper = {
@@ -69,10 +68,9 @@
     obsidian.enable = true;
     game_launchers = {
       r2modman.enable = true;
-      ryujinx.enable = true;
+      ryujinx.enable = false;
       heroic.enable = true;
       osu.enable = false;
-	  vintage-story.enable = true;
     };
     wlogout.enable = true;
     wine.enable = false;
@@ -98,6 +96,13 @@
   #programs.atuin = {
   #  enable = true;
   #};
+
+  home.username = "user";
+  home.homeDirectory = "/home/user";
+  home.stateVersion = "24.05";
+
+  # Let Home Manager install and manage itself.
+  programs.home-manager.enable = true;
 
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [

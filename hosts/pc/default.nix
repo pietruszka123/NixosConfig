@@ -38,10 +38,18 @@ in
     ./hardware-configuration.nix
   ];
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-36.9.5"
+  ];
+
   # Use the systemd-boot EFI boot loader.
   boot = {
     loader = {
-      systemd-boot.enable = true;
+      # systemd-boot.enable = true;
+      grub.enable = true;
+      grub.device = "nodev";
+      grub.useOSProber = true;
+      grub.efiSupport = true;
       efi.canTouchEfiVariables = true;
     };
     supportedFilesystems = [ "ntfs" ];
@@ -67,10 +75,12 @@ in
     virt-manager.enable = true;
     vr = {
       envision.enable = false;
-      wivrn.enable = true;
-      monado.enable = true;
+      wivrn.enable = false;
+      monado.enable = false;
       wlx-overlay.enable = true;
     };
+    ghidra.enable = true;
+    # gnome-keyring.enable = true;
   };
 
   programs = {
@@ -114,6 +124,25 @@ in
     hardwareClockInLocalTime = true;
   };
 
+  boot.loader.grub = {
+    minegrub-world-sel = {
+      enable = true;
+      customIcons = [
+        {
+          name = "nixos";
+          lineTop = "NixOS (23/11/2023, 23:03)";
+          lineBottom = "Survival Mode, No Cheats, Version: 23.11";
+          # Icon: you can use an icon from the remote repo, or load from a local file
+          imgName = "nixos";
+          # customImg = builtins.path {
+          #   path = ./nixos-logo.png;
+          #   name = "nixos-img";
+          # };
+        }
+      ];
+    };
+  };
+
   # Select internationalisation properties.
   # i18n.defaultLocale = "en_US.UTF-8";
   # console = {
@@ -132,6 +161,10 @@ in
     ];
   };
 
+  programs.wireshark = {
+    enable = true;
+    package = pkgs.wireshark;
+  };
   users.users.user = {
     isNormalUser = true;
     extraGroups = [
@@ -139,6 +172,8 @@ in
       "input"
       "networkmanager"
       "seat"
+      "podman"
+      "wireshark"
     ];
     shell = pkgs.fish;
     useDefaultShell = true;
@@ -149,7 +184,6 @@ in
 
       hyfetch
 
-      kdePackages.xwaylandvideobridge # Utility to allow streaming Wayland windows to X applications
       eww
 
       # neovim

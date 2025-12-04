@@ -16,8 +16,15 @@ in
 
     networking.wireguard.enable = true;
 
+    networking.networkmanager = {
+
+      plugins = with pkgs; [
+        networkmanager-openvpn
+      ];
+
+    };
+
     environment.systemPackages = with pkgs; [
-      networkmanager-openvpn
       openvpn
     ];
 
