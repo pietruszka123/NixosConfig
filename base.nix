@@ -7,7 +7,6 @@
   zen-browser-source,
   systemModule,
   systemName,
-
   neovim-nightly-overlay-source,
   vicinae-source,
   lib,
@@ -26,8 +25,6 @@ let
           (
             {
               "${a}" = {
-                # _module.args.userName = "user";
-                # _module.args.systemBaseVersion = "24.05";
                 imports = [
                   (import ./base-user.nix (
                     args

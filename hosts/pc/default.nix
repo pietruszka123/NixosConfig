@@ -174,6 +174,7 @@ in
       "seat"
       "podman"
       "wireshark"
+      "realtime"
     ];
     shell = pkgs.fish;
     useDefaultShell = true;

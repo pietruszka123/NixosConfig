@@ -83,6 +83,7 @@
     browsers = {
       floorp.enable = false;
       zen.enable = false;
+	  librewolf.enable = true;
     };
 
     file-managers = {

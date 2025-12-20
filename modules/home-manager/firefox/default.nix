@@ -4,7 +4,7 @@
   pkgs,
   inputs,
   ...
-}:
+}@args:
 
 let
   cfg = config.modules.firefox;
@@ -16,33 +16,13 @@ in
   config = lib.mkIf cfg.enable {
     home.sessionVariables = {
       MOZ_ENABLE_WAYLAND = 1;
-
     };
     programs.firefox = {
       enable = true;
 
       profiles = {
-        default = {
-          id = 0;
-          name = "default";
-          isDefault = true;
-          settings = {
-            "extensions.autoDisableScopes" = 0;
-			"middlemouse.paste" = false;
-          };
-
-
-          extensions.packages = with inputs.firefox-addons.packages."x86_64-linux"; [
-            ublock-origin
-            darkreader
-            sponsorblock
-            youtube-shorts-block
-            return-youtube-dislikes
-            shinigami-eyes
-            bitwarden
-          ];
-        };
-      };
+		default = (import ../browsers/firefox_base_config.nix (args));
+	  }; 
     };
 
   };
