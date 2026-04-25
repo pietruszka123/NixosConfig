@@ -81,6 +81,9 @@ in
     };
     ghidra.enable = true;
     # gnome-keyring.enable = true;
+    kwallet.enable = true;
+    sunshine.enable = false;
+    udisks2.enable = true;
   };
 
   programs = {
@@ -212,6 +215,7 @@ in
     (btop.override {
       cudaSupport = true;
     })
+
     # lemurs
     btrfs-progs
   ];

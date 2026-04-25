@@ -20,6 +20,7 @@
     wallpaper = {
       enable = true;
       hyprpaper.enable = true;
+      awww.enable = true;
     };
 
     shells = {
@@ -94,6 +95,8 @@
     syncthing.enable = true;
     feishin.enable = true;
     vicinae.enable = true;
+	merkuro.enable = true;
+	onlyoffice.enable = true;
   };
 
   #programs.atuin = {
@@ -135,7 +138,7 @@
     size = 21;
   };
 
-  programs.git-credential-oauth.enable = true;
+  # programs.git-credential-oauth.enable = true;
 
   catppuccin = {
     flavor = "mocha";

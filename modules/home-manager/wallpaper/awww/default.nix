@@ -2,23 +2,21 @@
   config,
   lib,
   pkgs,
-  inputs,
   ...
 }:
 
 let
-  cfg = config.modules.bottles;
+  cfg = config.modules.wallpaper.awww;
 in
 {
   options = {
-    modules.bottles.enable = lib.mkEnableOption "enable bottles module";
+    modules.wallpaper.awww.enable = lib.mkEnableOption "enable awww module";
   };
   config = lib.mkIf cfg.enable {
 
     home.packages = with pkgs; [
-      bottles
+      swww
     ];
-
   };
 
 }

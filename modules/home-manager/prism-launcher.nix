@@ -19,6 +19,7 @@ in
       (prismlauncher.override {
         additionalLibs = [
           glfw3-minecraft
+		  libvlc
 
           # async-profiler
         ];
