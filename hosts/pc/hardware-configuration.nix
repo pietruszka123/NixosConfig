@@ -23,6 +23,10 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
+  # # protect against the copy fail exploit by blacklisting the affected kernel modules
+  # boot.blacklistedKernelModules = [ "af_alg" "algif_hash" "algif_skcipher" "algif_rng" "algif_aead" ];
+  # # copy.fail mitigation, until we're on a kernel that has it patched
+  # boot.extraModprobeConfig = "install algif_aead /bin/false";
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/9db414b3-dd20-4c95-8119-64e8c75390fd";

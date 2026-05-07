@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
 
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
@@ -25,6 +25,10 @@
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    split-monitor-workspaces = {
+      url = "github:Duckonaut/split-monitor-workspaces";
+      inputs.hyprland.follows = "hyprland";
+    };
 
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
@@ -35,15 +39,6 @@
       url = "github:kaylorben/nixcord";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # caelestia-shell = {
-    #   url = "github:caelestia-dots/shell";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    # caelestia-cli = {
-    #   url = "github:caelestia-dots/cli";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    #
-    # };
 
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
@@ -53,6 +48,8 @@
     };
 
     minegrub-world-sel-theme.url = "github:Lxtharia/minegrub-world-sel-theme";
+
+    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
   };
 
   outputs =
@@ -64,9 +61,8 @@
       hyprland,
       zen-browser,
       neovim-nightly-overlay,
-      # caelestia-shell,
-      # caelestia-cli,
       vicinae,
+      split-monitor-workspaces,
       ...
     }@inputs:
     let
@@ -77,9 +73,7 @@
       zen-browser-source = zen-browser.packages.${system};
       neovim-nightly-overlay-source = inputs.neovim-nightly-overlay.packages.${system};
       vicinae-source = inputs.vicinae.packages.${system};
-
-      # caelestia-shell-source = caelestia-shell.packages.${system};
-      # caelestia-cli-source = caelestia-cli.packages.${system};
+      split-monitor-workspaces-source = inputs.split-monitor-workspaces.packages.${pkgs.system};
     in
     {
       nixosConfigurations =
@@ -95,14 +89,12 @@
                 inherit zen-browser-source;
                 inherit neovim-nightly-overlay-source;
                 inherit vicinae-source;
-                # inherit caelestia-shell-source;
-                # inherit caelestia-cli-source;
+                inherit split-monitor-workspaces-source;
               };
               modules = [
                 ./hosts/${systemName}
                 inputs.minegrub-world-sel-theme.nixosModules.default
               ];
-
             };
           };
         in
@@ -112,7 +104,7 @@
         nativeBuildInputs = with pkgs; [
           nil
           hyprls
-          nixfmt-rfc-style
+          nixfmt
 
         ];
 

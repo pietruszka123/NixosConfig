@@ -160,7 +160,7 @@ in
       packages = with pkgs; [
         # nix neovim language
         nil # lsp
-        nixfmt-rfc-style # formatter
+        nixfmt # formatter
 
         #tofi # Tiny dynamic menu for Wayland
 

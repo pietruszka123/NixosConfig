@@ -16,7 +16,7 @@
     environment = lib.mkMerge [
       (lib.mkIf config.modules.vr.wlx-overlay.enable {
         systemPackages = [
-          pkgs.wlx-overlay-s
+          pkgs.wayvr
         ];
       })
     ];

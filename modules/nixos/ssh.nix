@@ -16,7 +16,7 @@ in
     programs.ssh.startAgent = true;
     services.openssh = {
       enable = true;
-      ports = [ 2137 ];
+      ports = [ 22 ];
       settings = {
         PasswordAuthentication = true;
         KbdInteractiveAuthentication = false;

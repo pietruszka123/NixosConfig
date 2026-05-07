@@ -42,6 +42,7 @@ in
           relationshipNotifier.enable = true;
           volumeBooster.enable = true;
           youtubeAdblock.enable = true;
+		  favoriteGifSearch.enable = true;
         };
       };
 

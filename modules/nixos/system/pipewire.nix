@@ -60,23 +60,49 @@
         };
       };
 
-      wireplumber.enable = true;
-      wireplumber.configPackages = [
-        (pkgs.writeTextDir "share/wireplumber/main.lua.d/99-alsa-lowlatency.lua" ''
-                    alsa_monitor.rules = {
-                      {
-                        matches = [{"alsa.card_name" = "Live! Cam Chat HD VF0790";}];
-                        apply_properties = {
-          		["audio.format"] = "S16LE",
-                          ["audio.rate"] = "96000", -- for USB soundcards it should be twice your desired rate
-                        ["api.alsa.period-size"] = 2,
-          	      },
-                      },
-                    }
-        '')
+      wireplumber = {
+        enable = true;
+        extraConfig = {
+          "disable-suspension" = {
+            monitor.alsa.rules = [
+              {
+                matches = [
+                  {
+                    # Matches all sources
+                    node.name = "~alsa_input.*";
+                  }
+                  {
+                    # Matches all sinks
+                    node.name = "~alsa_output.*";
+                  }
+                ];
+                actions = {
+                  update-props = {
+                    session.suspend-timeout-seconds = 0;
+                  };
+                };
+              }
+            ];
 
-      ];
+          };
 
+        };
+        configPackages = [
+          (pkgs.writeTextDir "share/wireplumber/main.lua.d/99-alsa-lowlatency.lua" ''
+                      alsa_monitor.rules = {
+                        {
+                          matches = [{"alsa.card_name" = "Live! Cam Chat HD VF0790";}];
+                          apply_properties = {
+            		["audio.format"] = "S16LE",
+                            ["audio.rate"] = "96000", -- for USB soundcards it should be twice your desired rate
+                          ["api.alsa.period-size"] = 2,
+            	      },
+                        },
+                      }
+          '')
+
+        ];
+      };
     };
   };
 }

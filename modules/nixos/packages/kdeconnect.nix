@@ -16,7 +16,7 @@ in
   config = lib.mkIf cfg.enable {
     programs.kdeconnect = {
       enable = true;
-      package = stable-pkgs.plasma5Packages.kdeconnect-kde;
+      package = stable-pkgs.kdePackages.kdeconnect-kde;
     };
   };
 

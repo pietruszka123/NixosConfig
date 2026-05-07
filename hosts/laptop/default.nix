@@ -132,7 +132,7 @@ in
     shell = pkgs.fish;
     useDefaultShell = true;
     packages = with pkgs; [
-      nixfmt-rfc-style # formatter
+      nixfmt # formatter
 
       pavucontrol
 
