@@ -19,10 +19,10 @@ in
     };
     programs.firefox = {
       enable = true;
-
+      configPath = "${config.xdg.configHome}/mozilla/firefox";
       profiles = {
-		default = (import ../browsers/firefox_base_config.nix (args));
-	  }; 
+        default = (import ../browsers/firefox_base_config.nix (args));
+      };
     };
 
   };

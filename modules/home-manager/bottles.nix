@@ -3,6 +3,7 @@
   lib,
   pkgs,
   inputs,
+  stable-pkgs,
   ...
 }:
 
@@ -16,7 +17,7 @@ in
   config = lib.mkIf cfg.enable {
 
     home.packages = with pkgs; [
-      bottles
+      stable-pkgs.bottles
     ];
 
   };

@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  stable-pkgs,
   ...
 }:
 
@@ -16,7 +17,7 @@ in
 
     home.packages = with pkgs; [
 
-      (mpv.override {
+      (stable-pkgs.mpv.override {
 
         scripts = with pkgs; [
           mpvScripts.mpv-osc-tethys

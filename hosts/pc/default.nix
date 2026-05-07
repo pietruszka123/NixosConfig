@@ -39,7 +39,7 @@ in
   ];
 
   nixpkgs.config.permittedInsecurePackages = [
-    "electron-36.9.5"
+    # "electron-36.9.5"
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -68,18 +68,18 @@ in
     ssh.enable = true;
     transmission.enable = false;
     flatpak.enable = true;
-    alvr.enable = true;
+    alvr.enable = false;
     kdeconnect.enable = true;
 
     waydroid.enable = false;
-    virt-manager.enable = true;
+    virt-manager.enable = false;
     vr = {
       envision.enable = false;
       wivrn.enable = false;
       monado.enable = false;
-      wlx-overlay.enable = true;
+      wlx-overlay.enable = false;
     };
-    ghidra.enable = true;
+    ghidra.enable = false;
     # gnome-keyring.enable = true;
     kwallet.enable = true;
     sunshine.enable = false;
@@ -182,7 +182,7 @@ in
     shell = pkgs.fish;
     useDefaultShell = true;
     packages = with pkgs; [
-      nixfmt-rfc-style # formatter
+      nixfmt # formatter
 
       pavucontrol
 

@@ -70,21 +70,21 @@
     obsidian.enable = true;
     game_launchers = {
       r2modman.enable = true;
-      ryujinx.enable = true;
+      ryujinx.enable = false;
       heroic.enable = true;
       osu.enable = false;
-	  vintage-story.enable = true;
+      vintage-story.enable = false;
     };
     wlogout.enable = true;
     wine.enable = false;
 
     qbittorrent.enable = true;
-    bottles.enable = true;
+    bottles.enable = false;
 
     browsers = {
       floorp.enable = false;
       zen.enable = false;
-	  librewolf.enable = true;
+      librewolf.enable = true;
     };
 
     file-managers = {
@@ -95,8 +95,8 @@
     syncthing.enable = true;
     feishin.enable = true;
     vicinae.enable = true;
-	merkuro.enable = true;
-	onlyoffice.enable = true;
+    merkuro.enable = true;
+    onlyoffice.enable = true;
   };
 
   #programs.atuin = {
@@ -117,7 +117,7 @@
 
     unar
     # linux-wifi-hotspot
-    mate.engrampa
+    engrampa
     p7zip
 
     nerd-fonts.fira-code
