@@ -24,7 +24,9 @@ in
       enable = true;
       defaultEditor = true;
       withPython3 = true;
+      withRuby = true;
       package = neovim-nightly-overlay-source.default;
+	  initLua = builtins.readFile ./init.lua;  
     };
 
     # environment.variables =

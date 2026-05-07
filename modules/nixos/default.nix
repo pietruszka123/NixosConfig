@@ -11,6 +11,7 @@
     ./virt-manager.nix
 	./gnome-keyring.nix
 	./ghidra.nix
+	./kwallet.nix
   ];
 
 }

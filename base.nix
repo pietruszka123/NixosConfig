@@ -7,8 +7,8 @@
   zen-browser-source,
   systemModule,
   systemName,
-
   neovim-nightly-overlay-source,
+  split-monitor-workspaces-source,
   vicinae-source,
   lib,
   ...
@@ -26,8 +26,6 @@ let
           (
             {
               "${a}" = {
-                # _module.args.userName = "user";
-                # _module.args.systemBaseVersion = "24.05";
                 imports = [
                   (import ./base-user.nix (
                     args
@@ -68,6 +66,7 @@ in
         inherit zen-browser-source;
         inherit neovim-nightly-overlay-source;
         inherit vicinae-source;
+		inherit split-monitor-workspaces-source;
 
         systemConfig = {
           inherit systemModule;

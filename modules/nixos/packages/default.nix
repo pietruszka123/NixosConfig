@@ -6,5 +6,7 @@
     ./alvr.nix
     ./kdeconnect.nix
 	./vr
+	./sunshine.nix
+	./udisks2.nix
   ];
 }

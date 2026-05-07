@@ -6,6 +6,7 @@
   lib,
   userConfig,
   hyprland-source,
+  split-monitor-workspaces-source,
   ...
 }:
 {
@@ -22,8 +23,11 @@
 	
 
     wayland.windowManager.hyprland = {
+      plugins = [
+        split-monitor-workspaces-source.split-monitor-workspaces
+      ];
       enable = true;
-      
+
       package = hyprland-source.hyprland;
       portalPackage = hyprland-source.xdg-desktop-portal-hyprland;
 
@@ -68,6 +72,7 @@
       wl-clip-persist
 
       hyprpaper # wallpaper
+      hyprsunset
 
       # Screenshots
       grimblast

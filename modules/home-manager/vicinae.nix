@@ -13,9 +13,13 @@ in
     modules.vicinae.enable = lib.mkEnableOption "enable vicinae module";
   };
   config = lib.mkIf cfg.enable {
-    services.vicinae = {
+    programs.vicinae = {
       enable = true; # default: false
-      autoStart = true; # default: true
+      systemd = {
+        autoStart = true;
+        enable = true;
+		target = "hyprland-session.target";
+      };
       settings = {
         faviconService = "twenty";
         font = {
@@ -35,7 +39,6 @@ in
           rounding = 10;
         };
       };
-      # package = # specify package to use here. Can be omitted.
     };
   };
 

@@ -14,7 +14,7 @@ in
   };
   config = lib.mkIf cfg.enable {
 
-    home.packages = with pkgs; [ alacritty ];
+    home.packages = with pkgs; [ alacritty-graphics ];
 
     home.file.".config/alacritty/alacritty.toml".source = ./alacritty.toml;
     home.file.".config/alacritty/monokai_charcoal.toml".text = builtins.readFile (

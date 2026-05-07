@@ -8,9 +8,9 @@ args@{
 let
   cfg = config.modules.wallpaper;
   wallpapers = {
-	evening = "sleepy.jpg";
-	day = "gaming.jpg";
-	time = "19";
+    evening = "sleepy.jpg";
+    day = "gaming.jpg";
+    time = "19";
   };
 in
 {
@@ -19,7 +19,8 @@ in
   };
 
   imports = [
-    (import ./hyprpaper (args // {wallpaper = wallpapers;}) )
+    (import ./hyprpaper (args // { wallpaper = wallpapers; }))
+    (import ./awww (args // { wallpaper = wallpapers; }))
   ];
 
   config = lib.mkIf cfg.enable {

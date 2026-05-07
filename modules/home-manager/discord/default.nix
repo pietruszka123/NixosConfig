@@ -22,10 +22,9 @@ in
       })
     ];
     home.packages = with pkgs; [
-      (discord-canary.override {
-        withVencord = true;
-
-      })
+      # (discord-canary.override {
+      #   withVencord = true;
+      # })
 
       # (discord.override {
       #   # withVencord = true;

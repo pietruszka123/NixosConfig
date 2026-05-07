@@ -33,5 +33,7 @@
     ./syncthing.nix
     ./feishin.nix
 	./vicinae.nix
+	./merkuro.nix
+	./onlyoffice.nix
   ];
 }

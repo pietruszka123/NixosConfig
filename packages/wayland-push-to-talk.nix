@@ -3,7 +3,7 @@
   stdenv,
   libevdev,
   xdotool,
-  xorg,
+  libx11,
   dbus,
   pkg-config,
   fetchgit,
@@ -20,7 +20,7 @@ stdenv.mkDerivation rec {
   buildInputs = [
     libevdev
     xdotool
-    xorg.libX11
+    libx11
   ];
 
   nativeBuildInputs = [

@@ -3,6 +3,7 @@
   lib,
   pkgs,
   inputs,
+  stable-pkgs,
   ...
 }:
 
@@ -15,9 +16,8 @@ in
   };
   config = lib.mkIf cfg.enable {
 
-    home.packages = with inputs.nixpkgs-stable.legacyPackages.x86_64-linux; [
-      bottles-unwrapped
-
+    home.packages = with pkgs; [
+      stable-pkgs.bottles
     ];
 
   };

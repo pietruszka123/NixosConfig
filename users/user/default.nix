@@ -20,6 +20,7 @@
     wallpaper = {
       enable = true;
       hyprpaper.enable = true;
+      awww.enable = true;
     };
 
     shells = {
@@ -72,17 +73,18 @@
       ryujinx.enable = true;
       heroic.enable = true;
       osu.enable = false;
-	  vintage-story.enable = true;
+      vintage-story.enable = false;
     };
     wlogout.enable = true;
     wine.enable = false;
 
     qbittorrent.enable = true;
-    bottles.enable = true;
+    bottles.enable = false;
 
     browsers = {
       floorp.enable = false;
       zen.enable = false;
+      librewolf.enable = true;
     };
 
     file-managers = {
@@ -93,6 +95,8 @@
     syncthing.enable = true;
     feishin.enable = true;
     vicinae.enable = true;
+    merkuro.enable = true;
+    onlyoffice.enable = true;
   };
 
   #programs.atuin = {
@@ -113,7 +117,7 @@
 
     unar
     # linux-wifi-hotspot
-    mate.engrampa
+    engrampa
     p7zip
 
     nerd-fonts.fira-code
@@ -134,7 +138,7 @@
     size = 21;
   };
 
-  programs.git-credential-oauth.enable = true;
+  # programs.git-credential-oauth.enable = true;
 
   catppuccin = {
     flavor = "mocha";
