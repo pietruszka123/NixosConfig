@@ -20,6 +20,7 @@ let
       enable = true;
       nvidiaBusId = "PCI:1:00:0";
       intelBusId = "PCI:0:2:0";
+      nvidia_prime  = "offload";
     };
     pipewire.enable = true;
     #lemurs.enable = true;
@@ -46,6 +47,10 @@ in
     };
     supportedFilesystems = [ "ntfs" ];
   };
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-36.9.5"
+  ];
+
 
   #TODO: make it work from home manager
   environment.variables.EDITOR = "nvim";
@@ -67,9 +72,9 @@ in
     virt-manager.enable = true;
     vr = {
       envision.enable = false;
-      wivrn.enable = true;
-      monado.enable = true;
-      wlx-overlay.enable = true;
+      wivrn.enable = false;
+      monado.enable = false;
+      wlx-overlay.enable = false;
     };
   };
 
@@ -142,6 +147,7 @@ in
       # caelestia-cli-source.with-shell
 
       # kdePackages.dolphin
+	  cp210x-program
     ];
   };
 
@@ -151,7 +157,7 @@ in
   };
 
   environment.systemPackages = with pkgs; [
-    #brightnessctl # backlight controls
+    brightnessctl # backlight controls
     lshw # a small tool to extract detailed information on the hardware configuration of the machine
     vim
     wget

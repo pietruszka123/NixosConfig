@@ -15,4 +15,4 @@ fi
 echo $command
 echo $abs_path
 
-nixos-rebuild $command --flake $NIX_PATH#pc --option eval-cache false
+nixos-rebuild $command --flake $NIX_PATH#laptop --option eval-cache false
