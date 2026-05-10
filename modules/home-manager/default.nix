@@ -35,5 +35,6 @@
 	./vicinae.nix
 	./merkuro.nix
 	./onlyoffice.nix
+	./noctalia
   ];
 }

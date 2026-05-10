@@ -20,7 +20,7 @@ let
       enable = true;
       nvidiaBusId = "PCI:1:00:0";
       intelBusId = "PCI:0:2:0";
-      nvidia_prime  = "offload";
+      nvidia_prime = "offload";
     };
     pipewire.enable = true;
     #lemurs.enable = true;
@@ -51,7 +51,6 @@ in
     "electron-36.9.5"
   ];
 
-
   #TODO: make it work from home manager
   environment.variables.EDITOR = "nvim";
 
@@ -67,6 +66,7 @@ in
     flatpak.enable = true;
     alvr.enable = true;
     kdeconnect.enable = true;
+    kwallet.enable = true;
 
     waydroid.enable = false;
     virt-manager.enable = true;
@@ -147,7 +147,7 @@ in
       # caelestia-cli-source.with-shell
 
       # kdePackages.dolphin
-	  cp210x-program
+      cp210x-program
     ];
   };
 
