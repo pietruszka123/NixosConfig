@@ -2,8 +2,8 @@
   description = "Nixos config flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05"; # Change to unstable
 
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
@@ -23,7 +23,7 @@
 
     hyprland = {
       url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
     split-monitor-workspaces = {
       url = "github:Duckonaut/split-monitor-workspaces";
@@ -68,7 +68,10 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-      stable-pkgs = nixpkgs-stable.legacyPackages.${system};
+      stable-pkgs = import nixpkgs-stable {
+        inherit system;
+        config.allowUnfree = true;
+      };
       hyprland-source = hyprland.packages.${system};
       zen-browser-source = zen-browser.packages.${system};
       neovim-nightly-overlay-source = inputs.neovim-nightly-overlay.packages.${system};

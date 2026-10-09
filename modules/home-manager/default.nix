@@ -36,5 +36,6 @@
 	./merkuro.nix
 	./onlyoffice.nix
 	./noctalia
+	./gstreamer.nix
   ];
 }

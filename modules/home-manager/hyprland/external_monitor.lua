@@ -1,0 +1,14 @@
+--env = WLR_DRM_DEVICES,/dev/dri/card1:/dev/dri/card0 --card0 intel card1 nvidia
+
+--monitor=eDP-1,disabled
+
+
+-- Nvidia
+hl.env("LIBVA_DRIVER_NAME", "nvidia")
+hl.env("XDG_SESSION_TYPE", "wayland")
+hl.env("GBM_BACKEND", "nvidia - drm")
+hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia") -- breaks discord
+hl.env("WLR_NO_HARDWARE_CURSORS", "1")
+hl.env("MUTTER_DEBUG_KMS_THREAD_TYPE", "user")
+-- Enable tearing: disables the usage ot a newer kernel DRM API that doesn't support tearing yet.
+hl.env("WLR_DRM_NO_ATOMIC", "1")

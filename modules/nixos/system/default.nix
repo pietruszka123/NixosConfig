@@ -11,6 +11,7 @@
     ./openvpn.nix
     ./opentabletdriver.nix
     ./ratbag.nix
+	./plymouth.nix
   ];
 
 }

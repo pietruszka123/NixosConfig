@@ -12,6 +12,7 @@
 	./gnome-keyring.nix
 	./ghidra.nix
 	./kwallet.nix
+	./sunshine-test.nix
   ];
 
 }

@@ -15,6 +15,7 @@ in
   config = lib.mkIf cfg.enable {
     programs.nixcord = {
       enable = true;
+	   discord.vencord.enable = true;
       config = {
         autoUpdate = true;
 
@@ -42,7 +43,9 @@ in
           relationshipNotifier.enable = true;
           volumeBooster.enable = true;
           youtubeAdblock.enable = true;
-		  favoriteGifSearch.enable = true;
+		  tenorGifSearch.enable = true;
+		  webScreenShare.enable = true;
+		  # favoriteGifSearch.enable = true;
         };
       };
 

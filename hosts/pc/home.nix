@@ -7,7 +7,7 @@
 {
   modules = {
     hyprland = {
-      additional_config = ./hyprland.conf;
+      additional_config = ./hyprland.lua;
     };
   };
 }

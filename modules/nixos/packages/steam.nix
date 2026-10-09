@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  stable-pkgs,
   ...
 }:
 
@@ -15,6 +16,7 @@ in
   config = lib.mkIf cfg.enable {
     programs.steam = {
       enable = true;
+	  # package = stable-pkgs.steam;
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
       gamescopeSession.enable = true;

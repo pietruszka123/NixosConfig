@@ -14,6 +14,11 @@ in
   };
   config = lib.mkIf cfg.enable {
     virtualisation.waydroid.enable = true;
+
+
+	  virtualisation.waydroid.package = pkgs.waydroid-nftables;
+
+
   };
 
 }

@@ -51,6 +51,7 @@ in
   ];
 
   config = {
+    
     home-manager = {
       useUserPackages = true;
       useGlobalPkgs = true;
@@ -66,7 +67,7 @@ in
         inherit zen-browser-source;
         inherit neovim-nightly-overlay-source;
         inherit vicinae-source;
-		inherit split-monitor-workspaces-source;
+        inherit split-monitor-workspaces-source;
 
         systemConfig = {
           inherit systemModule;
@@ -78,6 +79,7 @@ in
         };
       };
       users = users;
+
       # let
       #   user = userName: {
       #     ${userName} = import ./hosts/${systemName}/home.nix;

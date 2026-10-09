@@ -19,8 +19,13 @@ in
     users.groups.libvirtd.members = [ "user" ];
 
     virtualisation.libvirtd.enable = true;
+    # virtualisation.libvirtd.qemu.swtpm.enable = true;
 
     virtualisation.spiceUSBRedirection.enable = true;
+
+	environment.systemPackages = with pkgs; [
+		virtio-win
+	];
   };
 
 }

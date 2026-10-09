@@ -65,6 +65,7 @@ require('lspconfig').nil_ls.setup({
 
 })
 vim.lsp.enable('pylsp')
+vim.lsp.enable("gopls")
 require("crates").setup {
 	lsp = {
 		enabled = true,

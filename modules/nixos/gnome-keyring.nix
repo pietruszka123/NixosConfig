@@ -15,7 +15,9 @@ in
   config = lib.mkIf cfg.enable {
 
     services.gnome.gnome-keyring.enable = true;
-
+    environment.systemPackages = with pkgs; [
+      seahorse
+    ];
     #TODO: make it detect dm
     security.pam.services.hyprland.enableGnomeKeyring = true;
   };

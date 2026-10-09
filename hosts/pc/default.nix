@@ -16,6 +16,7 @@ let
   systemModule = {
     powerManagement.enable = false;
     networking.enable = true;
+    plymouth.enable = true;
     nvidia = {
       enable = true;
       nvidiaBusId = "PCI:1:00:0";
@@ -32,11 +33,9 @@ let
 in
 {
 
-# networking.hosts = {
-#   "127.0.0.1" = ["api.snowymoon.net"];
-# };
-
-
+  # networking.hosts = {
+  #   "127.0.0.1" = ["api.snowymoon.net"];
+  # };
 
   imports = [
     (import ../../base.nix (args // { inherit systemModule; }))
@@ -45,7 +44,7 @@ in
   ];
 
   nixpkgs.config.permittedInsecurePackages = [
-    # "electron-36.9.5"
+    "pnpm-10.29.2" # Heroic launcher
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -65,6 +64,7 @@ in
   environment.variables.EDITOR = "nvim";
 
   nixpkgs.config.allowUnfree = true;
+  # stable-pkgs.config.allowUnfree = true;
 
   systemModule = systemModule;
 
@@ -77,8 +77,8 @@ in
     alvr.enable = false;
     kdeconnect.enable = true;
 
-    waydroid.enable = false;
-    virt-manager.enable = false;
+    waydroid.enable = true;
+    virt-manager.enable = true;
     vr = {
       envision.enable = false;
       wivrn.enable = false;
@@ -86,12 +86,12 @@ in
       wlx-overlay.enable = false;
     };
     ghidra.enable = false;
-    # gnome-keyring.enable = true;
-    kwallet.enable = true;
+    gnome-keyring.enable = true;
+    # kwallet.enable = true;
     sunshine.enable = false;
     udisks2.enable = true;
+    sunshine-test.enable = false;
   };
-
   programs = {
     fish.enable = true;
     hyprland = {
@@ -217,6 +217,8 @@ in
     vim
     wget
     parted
+
+	sdl3.lib # minecraft 26.3 fix
 
     (btop.override {
       cudaSupport = true;

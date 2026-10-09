@@ -14,7 +14,7 @@ in
   };
   config = lib.mkIf cfg.enable {
 
-    security.pam.services.hyprland.kwallet.enable = true;
+    security.pam.services.user.kwallet.enable = true;
 
   };
 

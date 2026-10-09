@@ -25,7 +25,7 @@ in
     home.username = userName;
     home.homeDirectory = "/home/${userName}";
 
-    home.stateVersion = systemBaseVersion;
+    home.stateVersion = builtins.trace "${systemBaseVersion}" systemBaseVersion;
 
     programs.home-manager.enable = true;
   };

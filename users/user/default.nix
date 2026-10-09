@@ -12,6 +12,7 @@
 {
 
   modules = {
+	gstreamer.enable = true;
     hyprland = {
       enable = true;
       # additional_config = ./hyprland.conf;
@@ -51,8 +52,8 @@
       };
       # android-studio.enable = false;
     };
-    waybar.enable = true;
-    quickshell.enable = true;
+    waybar.enable = false;
+    quickshell.enable = false;
 
     atuin.enable = true;
     terminals = {
@@ -69,8 +70,8 @@
     mpv.enable = true;
     obsidian.enable = true;
     game_launchers = {
-      r2modman.enable = true;
-      ryujinx.enable = true;
+      r2modman.enable = false;
+      ryujinx.enable = false;
       heroic.enable = true;
       osu.enable = false;
       vintage-story.enable = false;
@@ -79,7 +80,7 @@
     wine.enable = false;
 
     qbittorrent.enable = true;
-    bottles.enable = false;
+    bottles.enable = true;
 
     browsers = {
       floorp.enable = false;
@@ -97,6 +98,8 @@
     vicinae.enable = true;
     merkuro.enable = true;
     onlyoffice.enable = true;
+    noctalia.enable = true;
+
   };
 
   #programs.atuin = {
@@ -133,6 +136,9 @@
     kdePackages.breeze-icons
     adwaita-icon-theme
 
+
+	vaults
+
   ];
   home.pointerCursor = {
     size = 21;
@@ -141,6 +147,8 @@
   # programs.git-credential-oauth.enable = true;
 
   catppuccin = {
+	autoEnable = false;
+	enable = true;
     flavor = "mocha";
     accent = "lavender";
     cursors.enable = true;
