@@ -21,7 +21,7 @@
   config = lib.mkIf config.modules.hyprland.enable {
     #programs.hyprland.enable = true;
 
-	services.hyprpolkitagent.enable = true;
+    services.hyprpolkitagent.enable = true;
 
     wayland.windowManager.hyprland = {
       configType = "lua";
@@ -37,6 +37,12 @@
       xwayland.enable = true;
       extraConfig = builtins.readFile ./hyprland.lua;
     };
+
+    home.file.".config/hypr/plugins/split-monitor-workspaces".source = builtins.fetchGit {
+      url = "https://github.com/zjeffer/split-monitor-workspaces";
+      rev =  "656ac1f024f0c1d6ec007f4c25cbc02951d51c9c";
+    };
+
     # home.file.".config/hypr/hyprland.conf".source = ./hyprland.conf;
     home.file.".config/hypr/app_rules.lua".source = ./app_rules.lua;
     # TODO: use specialization directly
